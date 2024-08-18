@@ -35,6 +35,8 @@ var right_hand_grab = null
 var ragdoll_mode = false
 
 @export var kick_angle: float = 1.5
+var left_foot_active: bool = false
+var right_foot_active: bool = false
 
 func _ready() -> void:
 	$Skeleton3D/PhysicalBoneSimulator3D.physical_bones_start_simulation()
@@ -97,9 +99,15 @@ func HandleKick():
 	if ragdoll_mode:
 		return
 	if Input.is_action_pressed("kick_left"):
+		left_foot_active = true
 		left_leg_control.rotation.x = kick_angle
+	else:
+		left_foot_active = false
 	if Input.is_action_pressed("kick_right"):
+		right_foot_active = true
 		right_leg_control.rotation.x = kick_angle
+	else:
+		right_foot_active = false
 
 func HandleRotation():
 	if ragdoll_mode:
@@ -220,3 +228,15 @@ func _on_LeftHand_body_entered(body: Node3D) -> void:
 				left_grab_joint.set_node_b(body.get_path())
 				left_hand_grab = body
 				print("Left hand grabbing " + body.name)
+
+
+func _on_RightFoot_body_entered(body: Node3D) -> void:
+	if right_foot_active:
+		if body is Breakable:
+			body.Break()
+
+
+func _on_LeftFoot_body_entered(body: Node3D) -> void:
+	if left_foot_active:
+		if body is Breakable:
+			body.Break()
