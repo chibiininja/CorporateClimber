@@ -1,28 +1,57 @@
-[gd_scene load_steps=4 format=3 uid="uid://4yr67bq3gwve"]
+[gd_scene load_steps=8 format=3 uid="uid://4yr67bq3gwve"]
 
-[ext_resource type="PackedScene" uid="uid://d0ldee2kfaric" path="res://untitled.tscn" id="1_d2u2b"]
+[ext_resource type="PackedScene" uid="uid://d0ldee2kfaric" path="res://ragdoll/ragdoll.tscn" id="1_d2u2b"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bblfi"]
 size = Vector3(200, 1, 200)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_jv715"]
 
+[sub_resource type="BoxMesh" id="BoxMesh_onfi5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r7km5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mvn62"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_bb2bk"]
+
 [node name="ClimbingTest" type="Node3D"]
 
 [node name="Stage" type="Node3D" parent="."]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Stage"]
+[node name="Floor" type="StaticBody3D" parent="Stage"]
+collision_mask = 3
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage/Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("BoxShape3D_bblfi")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Stage/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Stage/Floor"]
 transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
 mesh = SubResource("PlaneMesh_jv715")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.537864, 0.280271, -0.795079, -0.0647471, 0.926599, 0.370434, 0.840541, 0.250722, -0.480238, -7.41249, 6.41539, -4.39166)
+[node name="Box" type="StaticBody3D" parent="Stage" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -3)
+collision_mask = 3
 
-[node name="untitled" parent="." instance=ExtResource("1_d2u2b")]
-transform = Transform3D(1, 0, 0, 0, 0.00654492, 0.999979, 0, -0.999979, 0.00654492, -1.07727, 0.757762, -0.200654)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Stage/Box"]
+mesh = SubResource("BoxMesh_onfi5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage/Box"]
+shape = SubResource("BoxShape3D_r7km5")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Stage" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 2)
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage/RigidBody3D"]
+shape = SubResource("BoxShape3D_mvn62")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Stage/RigidBody3D"]
+mesh = SubResource("BoxMesh_bb2bk")
+
+[node name="ragdoll" parent="." instance=ExtResource("1_d2u2b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.513841, 0.857886, 0, -0.857886, 0.513841, 0, 0, 0)

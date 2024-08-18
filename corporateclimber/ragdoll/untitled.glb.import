@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bhcf4ie8ket5q"
-path="res://.godot/imported/untitled.glb-366c4440df010e25275eede91a7f7cb3.scn"
+path="res://.godot/imported/untitled.glb-e5f8b89a7dd385d14a00f454f5b3f467.scn"
 
 [deps]
 
-source_file="res://untitled.glb"
-dest_files=["res://.godot/imported/untitled.glb-366c4440df010e25275eede91a7f7cb3.scn"]
+source_file="res://ragdoll/untitled.glb"
+dest_files=["res://.godot/imported/untitled.glb-e5f8b89a7dd385d14a00f454f5b3f467.scn"]
 
 [params]
 
