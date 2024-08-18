@@ -12,16 +12,17 @@ extends Node3D
 @onready var left_arm_control: Node3D = $LeftArmControl
 @onready var right_arm_control: Node3D = $RightArmControl
 
-var MOUSE_SENSITIVITY = 0.05
-var WALK_SPEED = 0.5
+@export var mouse_sensitivity: float = 0.05
+@export var walk_speed: float = 0.6
 
 var walk_animation_timer = 0
-var WALK_ANIMATION_SPEED = 0.5
+@export var walk_animation_speed: float = 0.6
+@export var walk_animation_angle: float = 0.4
 var is_walking: bool = false
 
 @onready var jump_ray_cast_3d: RayCast3D = $"Skeleton3D/PhysicalBoneSimulator3D/Physical Bone mixamorig_Hips/JumpRayCast3D"
 var can_jump: bool = true
-var JUMP_STRENGTH = 100
+@export var jump_strength: float = 100
 
 var left_hand_active: bool = false
 var right_hand_active: bool = false
@@ -33,10 +34,12 @@ var right_hand_grab = null
 
 var ragdoll_mode = false
 
+@export var kick_angle: float = 1.5
+
 func _ready() -> void:
 	$Skeleton3D/PhysicalBoneSimulator3D.physical_bones_start_simulation()
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	camera_root.global_transform.origin = head.global_transform.origin
 	
 	HandleRotation()
@@ -90,6 +93,14 @@ func HandleGrab():
 		right_grab_joint.set_node_b("")
 		right_hand_grab = null
 
+func HandleKick():
+	if ragdoll_mode:
+		return
+	if Input.is_action_pressed("kick_left"):
+		left_leg_control.rotation.x = kick_angle
+	if Input.is_action_pressed("kick_right"):
+		right_leg_control.rotation.x = kick_angle
+
 func HandleRotation():
 	if ragdoll_mode:
 		return
@@ -106,16 +117,16 @@ func HandleWalk():
 	if not ragdoll_mode:
 		for bone in body_bones:
 			if Input.is_action_pressed("forward"):
-				bone.apply_central_impulse(-body_control.transform.basis.z * WALK_SPEED / body_bones.size())
+				bone.apply_central_impulse(-body_control.transform.basis.z * walk_speed / body_bones.size())
 				is_walking = true
 			if Input.is_action_pressed("left"):
-				bone.apply_central_impulse(-body_control.transform.basis.x * WALK_SPEED / body_bones.size())
+				bone.apply_central_impulse(-body_control.transform.basis.x * walk_speed / body_bones.size())
 				is_walking = true
 			if Input.is_action_pressed("right"):
-				bone.apply_central_impulse(body_control.transform.basis.x * WALK_SPEED / body_bones.size())
+				bone.apply_central_impulse(body_control.transform.basis.x * walk_speed / body_bones.size())
 				is_walking = true
 			if Input.is_action_pressed("backward"):
-				bone.apply_central_impulse(body_control.transform.basis.z * WALK_SPEED / body_bones.size())
+				bone.apply_central_impulse(body_control.transform.basis.z * walk_speed / body_bones.size())
 				is_walking = true
 			
 			if Input.is_action_just_pressed("jump"):
@@ -123,7 +134,7 @@ func HandleWalk():
 					if jump_ray_cast_3d.is_colliding():
 						if jump_ray_cast_3d.get_collision_normal().y > 0.5:
 							can_jump = false
-							bone.apply_central_impulse(body_control.transform.basis.y * JUMP_STRENGTH / body_bones.size())
+							bone.apply_central_impulse(body_control.transform.basis.y * jump_strength / body_bones.size())
 							await get_tree().create_timer(0.25).timeout
 							can_jump = true
 	
@@ -132,6 +143,8 @@ func HandleWalk():
 	else:
 		left_leg_control.rotation.x = 0
 		right_leg_control.rotation.x = 0
+	
+	HandleKick()
 
 func HandleRagdoll():
 	var value = not ragdoll_mode
@@ -169,9 +182,9 @@ func HandleRagdoll():
 	body_control.get_node("Generic6DOFJoint3D3").set_flag_z(Generic6DOFJoint3D.FLAG_ENABLE_ANGULAR_SPRING, value)
 
 func AnimateWalk():
-	walk_animation_timer += 0.1
-	left_leg_control.rotation.x = sin(walk_animation_timer) * WALK_ANIMATION_SPEED
-	right_leg_control.rotation.x = -sin(walk_animation_timer) * WALK_ANIMATION_SPEED
+	walk_animation_timer += walk_animation_speed * PI / 10
+	left_leg_control.rotation.x = sin(walk_animation_timer) * walk_animation_angle
+	right_leg_control.rotation.x = -sin(walk_animation_timer) * walk_animation_angle
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("left_mouse"):
@@ -184,8 +197,8 @@ func _input(event: InputEvent) -> void:
 		HandleRagdoll()
 	
 	if event is InputEventMouseMotion:
-		camera_root.rotation_degrees.y -= event.relative.x * MOUSE_SENSITIVITY
-		camera_root.rotation_degrees.x -= event.relative.y * MOUSE_SENSITIVITY
+		camera_root.rotation_degrees.y -= event.relative.x * mouse_sensitivity
+		camera_root.rotation_degrees.x -= event.relative.y * mouse_sensitivity
 		camera_root.rotation_degrees.x = clamp(camera_root.rotation_degrees.x, -90, 90)
 
 
