@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://4yr67bq3gwve"]
+
+[ext_resource type="PackedScene" uid="uid://d0ldee2kfaric" path="res://untitled.tscn" id="1_d2u2b"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bblfi"]
+size = Vector3(200, 1, 200)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_jv715"]
+
+[node name="ClimbingTest" type="Node3D"]
+
+[node name="Stage" type="Node3D" parent="."]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Stage"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_bblfi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Stage/StaticBody3D"]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
+mesh = SubResource("PlaneMesh_jv715")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.537864, 0.280271, -0.795079, -0.0647471, 0.926599, 0.370434, 0.840541, 0.250722, -0.480238, -7.41249, 6.41539, -4.39166)
+
+[node name="untitled" parent="." instance=ExtResource("1_d2u2b")]
+transform = Transform3D(1, 0, 0, 0, 0.00654492, 0.999979, 0, -0.999979, 0.00654492, -1.07727, 0.757762, -0.200654)
