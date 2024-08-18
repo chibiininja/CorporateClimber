@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dos1d5jifd3s6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_46fpj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rldxl"]
+
+[node name="BasicCube" type="Node3D"]
+
+[node name="Box" type="StaticBody3D" parent="." groups=["CanGrab"]]
+collision_mask = 3
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Box"]
+mesh = SubResource("BoxMesh_46fpj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box"]
+shape = SubResource("BoxShape3D_rldxl")

@@ -1,0 +1,85 @@
+[gd_scene load_steps=8 format=3 uid="uid://bfmkjvdqoxmnj"]
+
+[ext_resource type="PackedScene" uid="uid://dsboxtbpotmu7" path="res://scenes/MockBuilding.tscn" id="1_tpcub"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ti6md"]
+size = Vector3(200, 1, 200)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_c35d2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a23pw"]
+albedo_color = Color(0.0562916, 0.0562916, 0.0562916, 1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qbi25"]
+sky_top_color = Color(0.0267232, 0.0220812, 0.0963542, 1)
+sky_horizon_color = Color(0.22682, 0.0641547, 0.559896, 1)
+sky_curve = 0.0375
+ground_bottom_color = Color(0.135156, 0.111057, 0.239583, 1)
+ground_horizon_color = Color(0.260417, 0.113932, 0.455729, 1)
+ground_curve = 0.0546418
+ground_energy_multiplier = 1.37
+sun_angle_max = 10.65
+sun_curve = 0.0137259
+energy_multiplier = 1.89
+
+[sub_resource type="Sky" id="Sky_qlvbg"]
+sky_material = SubResource("ProceduralSkyMaterial_qbi25")
+radiance_size = 1
+
+[sub_resource type="Environment" id="Environment_qb4gs"]
+background_mode = 2
+background_color = Color(0.571771, 0.168152, 0.742188, 1)
+background_energy_multiplier = 2.33
+sky = SubResource("Sky_qlvbg")
+ambient_light_source = 2
+ambient_light_color = Color(0.578064, 0.306966, 0.640625, 1)
+ambient_light_energy = 0.4
+ssao_enabled = true
+ssao_radius = 0.89
+ssil_enabled = true
+ssil_radius = 2.18
+ssil_intensity = 8.44
+ssil_sharpness = 1.0
+ssil_normal_rejection = 0.58
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
+sdfgi_bounce_feedback = 0.22
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 1.42
+glow_strength = 0.57
+glow_bloom = 1.0
+glow_blend_mode = 1
+fog_light_color = Color(0.268936, 0.218018, 0.489583, 1)
+fog_sun_scatter = 2.5
+fog_density = 0.0
+fog_sky_affect = 0.0
+fog_height = 447.1
+fog_height_density = 2.4789
+volumetric_fog_density = 0.042
+volumetric_fog_albedo = Color(0.421875, 0.421875, 0.421875, 1)
+volumetric_fog_emission = Color(0.165482, 0.0947062, 0.346354, 1)
+volumetric_fog_ambient_inject = 0.47
+volumetric_fog_sky_affect = 0.641
+
+[node name="DuskScene" type="Node3D"]
+
+[node name="MockBuilding" parent="." instance=ExtResource("1_tpcub")]
+
+[node name="Floor" type="StaticBody3D" parent="MockBuilding"]
+transform = Transform3D(4.67603, 0, 0, 0, 1, 0, 0, 0, 3.46035, 0, 0, 0)
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MockBuilding/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_ti6md")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MockBuilding/Floor"]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
+mesh = SubResource("PlaneMesh_c35d2")
+surface_material_override/0 = SubResource("StandardMaterial3D_a23pw")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_qb4gs")
+
+[editable path="MockBuilding"]

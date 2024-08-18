@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://chvmf4ylpbp57"]
+
+[resource]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.768229, 0.763228, 0.448134, 0.54902)
+metallic_specular = 0.56
+roughness = 0.06
+emission_enabled = true
+emission = Color(0.571962, 0.183675, 0.578125, 1)
+clearcoat_enabled = true
+backlight_enabled = true
+backlight = Color(0.916667, 0.889065, 0.563368, 1)
+refraction_enabled = true

@@ -1,0 +1,56 @@
+[gd_resource type="Sky" load_steps=9 format=3 uid="uid://cyc3kxweea487"]
+
+[ext_resource type="Shader" path="res://Lighting/noiseSky.gdshader" id="1_yug6o"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_73nta"]
+noise_type = 2
+fractal_type = 3
+fractal_octaves = 10
+fractal_lacunarity = 0.5
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_eyss3"]
+seamless = true
+seamless_blend_skirt = 0.204
+noise = SubResource("FastNoiseLite_73nta")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_gre2a"]
+noise_type = 0
+seed = 175
+frequency = 0.0054
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dx1hp"]
+seamless = true
+seamless_blend_skirt = 0.152
+as_normal_map = true
+noise = SubResource("FastNoiseLite_gre2a")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_10xuj"]
+noise_type = 0
+seed = 85
+frequency = 0.0077
+fractal_weighted_strength = 0.78
+cellular_jitter = 1.485
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_uqm73"]
+invert = true
+generate_mipmaps = false
+seamless = true
+seamless_blend_skirt = 0.587
+noise = SubResource("FastNoiseLite_10xuj")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_05y2f"]
+shader = ExtResource("1_yug6o")
+shader_parameter/skyColor = Color(0.0527005, 0.0319553, 0.197917, 1)
+shader_parameter/horizonColor = Color(0.0980415, 0.0215115, 0.135417, 1)
+shader_parameter/clouds_main_color = Color(0.470049, 0.450738, 0.697917, 1)
+shader_parameter/clouds_edge_color = Color(0.280837, 0.139031, 0.643229, 1)
+shader_parameter/clouds_speed = 0.04
+shader_parameter/clouds_scale = 0.59
+shader_parameter/clouds_cutoff = 0.14
+shader_parameter/clouds_fuzziness = 0.41
+shader_parameter/clouds_texture = SubResource("NoiseTexture2D_uqm73")
+shader_parameter/clouds_distort_texture = SubResource("NoiseTexture2D_eyss3")
+shader_parameter/clouds_noise_texture = SubResource("NoiseTexture2D_dx1hp")
+
+[resource]
+sky_material = SubResource("ShaderMaterial_05y2f")
