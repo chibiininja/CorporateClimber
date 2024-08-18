@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://4yr67bq3gwve"]
+[gd_scene load_steps=14 format=3 uid="uid://4yr67bq3gwve"]
 
 [ext_resource type="PackedScene" uid="uid://d0ldee2kfaric" path="res://ragdoll/ragdoll.tscn" id="1_d2u2b"]
 
@@ -12,7 +12,7 @@ size = Vector3(200, 1, 200)
 [sub_resource type="BoxMesh" id="BoxMesh_bb2bk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_geja2"]
-size = Vector3(5, 9, 1)
+size = Vector3(5, 9, 5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_5bwym"]
 
@@ -25,6 +25,11 @@ radius = 1.0
 height = 10.0
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_slqwu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_efawd"]
+size = Vector3(25, 5, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xd1cu"]
 
 [node name="ClimbingTest" type="Node3D"]
 
@@ -49,17 +54,18 @@ collision_mask = 3
 shape = SubResource("BoxShape3D_mvn62")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Stage/Moveable Box"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4)
 mesh = SubResource("BoxMesh_bb2bk")
 
 [node name="Wall" type="StaticBody3D" parent="Stage"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, -3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, -5)
 collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Stage/Wall"]
 shape = SubResource("BoxShape3D_geja2")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Stage/Wall"]
-transform = Transform3D(5, 0, 0, 0, 9, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(5, 0, 0, 0, 9, 0, 0, 0, 5, 0, 0, 0)
 mesh = SubResource("BoxMesh_5bwym")
 
 [node name="GrabNode" type="RigidBody3D" parent="Stage" groups=["CanGrab"]]
@@ -292,6 +298,39 @@ shape = SubResource("CylinderShape3D_wjmbg")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Stage/GrabNode10"]
 transform = Transform3D(-8.74228e-09, 1, 0, -0.2, -4.37114e-08, 0, 0, 0, 0.2, 0, 0, 0)
 mesh = SubResource("CylinderMesh_slqwu")
+
+[node name="Railing" type="StaticBody3D" parent="Stage"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 9.5, -7.4)
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage/Railing"]
+shape = SubResource("BoxShape3D_efawd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Stage/Railing"]
+transform = Transform3D(25, 0, 0, 0, 5, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_xd1cu")
+
+[node name="Railing2" type="StaticBody3D" parent="Stage"]
+transform = Transform3D(-8.74228e-09, 0, 0.2, 0, 0.2, 0, -0.2, 0, -8.74228e-09, -2.4, 9.5, -5)
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage/Railing2"]
+shape = SubResource("BoxShape3D_efawd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Stage/Railing2"]
+transform = Transform3D(25, 0, 0, 0, 5, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_xd1cu")
+
+[node name="Railing3" type="StaticBody3D" parent="Stage"]
+transform = Transform3D(-8.74228e-09, 0, -0.2, 0, 0.2, 0, 0.2, 0, -8.74228e-09, 2.4, 9.5, -5)
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage/Railing3"]
+shape = SubResource("BoxShape3D_efawd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Stage/Railing3"]
+transform = Transform3D(25, 0, 0, 0, 5, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_xd1cu")
 
 [node name="ragdoll" parent="." instance=ExtResource("1_d2u2b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
