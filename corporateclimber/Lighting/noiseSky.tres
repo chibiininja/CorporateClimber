@@ -32,7 +32,6 @@ fractal_weighted_strength = 0.78
 cellular_jitter = 1.485
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_uqm73"]
-invert = true
 generate_mipmaps = false
 seamless = true
 seamless_blend_skirt = 0.587
