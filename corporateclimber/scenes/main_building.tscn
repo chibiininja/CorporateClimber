@@ -1,5 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://cfv2aviop57g"]
+[gd_scene load_steps=15 format=3 uid="uid://cfv2aviop57g"]
 
+[ext_resource type="PackedScene" uid="uid://conxl4qe73nvc" path="res://ragdoll/breakable_window.tscn" id="1_7olci"]
 [ext_resource type="ArrayMesh" uid="uid://58n5n43fqhdu" path="res://Blocks/building.res" id="2_75gvm"]
 [ext_resource type="PackedScene" uid="uid://d0ldee2kfaric" path="res://ragdoll/ragdoll.tscn" id="2_ogaf4"]
 
@@ -68,9 +69,8 @@ _data = {
 }
 
 [node name="main_building" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00428104, 0.0395908, -0.000442505)
 
-[node name="Temporary" type="Node" parent="."]
+[node name="Temporary" type="Node3D" parent="."]
 
 [node name="TestFloor" type="StaticBody3D" parent="Temporary"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00428104, 0.0395908, -0.000442505)
@@ -101,7 +101,7 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Building"]
 shape = SubResource("ConcavePolygonShape3D_64k7f")
 
-[node name="StaticGrabables" type="Node" parent="."]
+[node name="StaticGrabables" type="Node3D" parent="."]
 
 [node name="GrabPanel" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2.04, -1.6)
@@ -250,6 +250,27 @@ node_a = NodePath("..")
 linear_limit/upper_distance = 0.0
 linear_limit/lower_distance = 0.0
 
+[node name="GrabPanel13" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.548, 7.21084, -1.6)
+collision_mask = 3
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabPanel13"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_thf7n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabPanel13"]
+mesh = SubResource("BoxMesh_ppf5l")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabPanel13"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
 [node name="GrabPanel8" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.0929, 7.75361, -1.6)
 collision_mask = 3
@@ -355,7 +376,7 @@ node_a = NodePath("..")
 linear_limit/upper_distance = 0.0
 linear_limit/lower_distance = 0.0
 
-[node name="MovingGrabables" type="Node" parent="."]
+[node name="MovingGrabables" type="Node3D" parent="."]
 
 [node name="VerticalMovingBar" type="Node3D" parent="MovingGrabables"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.661, 11.5, -2.15)
@@ -385,7 +406,7 @@ node_a = NodePath("RigidBody3D")
 linear_limit/upper_distance = 4.0
 linear_limit/lower_distance = -4.0
 
-[node name="RigidBody3D" type="RigidBody3D" parent="MovingGrabables/SliderBar"]
+[node name="RigidBody3D" type="RigidBody3D" parent="MovingGrabables/SliderBar" groups=["CanGrab"]]
 collision_mask = 3
 axis_lock_linear_y = true
 axis_lock_linear_z = true
@@ -403,3 +424,8 @@ shape = SubResource("CylinderShape3D_urhsu")
 transform = Transform3D(1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, 0, 0, 0)
 mesh = SubResource("CylinderMesh_x1ul6")
 skeleton = NodePath("")
+
+[node name="Windows" type="Node3D" parent="."]
+
+[node name="BreakableWindow" parent="Windows" instance=ExtResource("1_7olci")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.2749, 5.76311, -1.7)
