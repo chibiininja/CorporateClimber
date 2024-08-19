@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddd0dlo2sr2le"]
+
+[ext_resource type="Material" uid="uid://egdo6cn0c0t" path="res://Blocks/backgroundBuildingMat.tres" id="1_sq45y"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_y48l8"]
+
+[node name="Building2" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(80, 0, 0, 0, 100.186, 0, 0, 0, 80, 0, 100.56, 0)
+material_override = ExtResource("1_sq45y")
+mesh = SubResource("CylinderMesh_y48l8")

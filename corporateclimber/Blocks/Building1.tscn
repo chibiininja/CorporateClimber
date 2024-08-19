@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://jl0o1re0yqxl"]
+
+[ext_resource type="Material" uid="uid://egdo6cn0c0t" path="res://Blocks/backgroundBuildingMat.tres" id="1_w2bmq"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_vrn1p"]
+
+[node name="Building1" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(80, 0, 0, 0, 200, 0, 0, 0, 80, 0, 100, 0)
+material_override = ExtResource("1_w2bmq")
+mesh = SubResource("BoxMesh_vrn1p")
