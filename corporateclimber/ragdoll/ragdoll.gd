@@ -41,7 +41,7 @@ var right_foot_active: bool = false
 func _ready() -> void:
 	$Skeleton3D/PhysicalBoneSimulator3D.physical_bones_start_simulation()
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	camera_root.global_transform.origin = head.global_transform.origin
 	
 	HandleRotation()
