@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://4yr67bq3gwve"]
+[gd_scene load_steps=21 format=3 uid="uid://4yr67bq3gwve"]
 
 [ext_resource type="PackedScene" uid="uid://conxl4qe73nvc" path="res://ragdoll/breakable_window.tscn" id="1_cuwrl"]
 [ext_resource type="PackedScene" uid="uid://d0ldee2kfaric" path="res://ragdoll/ragdoll.tscn" id="1_d2u2b"]
@@ -36,14 +36,17 @@ height = 10.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_w5jny"]
 
+[sub_resource type="SphereMesh" id="SphereMesh_du5kp"]
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_ikkht"]
-size = Vector3(10, 1, 30)
+size = Vector3(10, 1, 10)
 
 [sub_resource type="BoxMesh" id="BoxMesh_5ioyw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lge5w"]
 
 [node name="ClimbingTest" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00428104, 0.0395908, -0.000442505)
 
 [node name="Stage" type="Node3D" parent="."]
 
@@ -439,17 +442,6 @@ shape = SubResource("BoxShape3D_3yjvb")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Stage/Swing/Wall3"]
 mesh = SubResource("BoxMesh_w5jny")
 
-[node name="Wall4" type="StaticBody3D" parent="Stage/Swing"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 6.5, -3)
-collision_mask = 3
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage/Swing/Wall4"]
-shape = SubResource("BoxShape3D_3yjvb")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Stage/Swing/Wall4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
-mesh = SubResource("BoxMesh_w5jny")
-
 [node name="Wall6" type="StaticBody3D" parent="Stage/Swing"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2.5, -8)
 collision_mask = 3
@@ -480,9 +472,21 @@ shape = SubResource("BoxShape3D_3yjvb")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Stage/Swing/Wall8"]
 mesh = SubResource("BoxMesh_w5jny")
 
-[node name="SwingingPlatform" type="RigidBody3D" parent="Stage/Swing"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, -4)
-axis_lock_angular_x = true
+[node name="HingeJoint3D" type="HingeJoint3D" parent="Stage/Swing"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4, 9.5, -4)
+node_a = NodePath("../SwingingPlatform")
+angular_limit/enable = true
+angular_limit/upper = 0.785398
+angular_limit/lower = -0.785398
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Stage/Swing/HingeJoint3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("SphereMesh_du5kp")
+
+[node name="SwingingPlatform" type="RigidBody3D" parent="Stage/Swing" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 5, -4)
+collision_mask = 3
+axis_lock_linear_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
 
@@ -491,14 +495,94 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 shape = SubResource("BoxShape3D_ikkht")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Stage/Swing/SwingingPlatform"]
-transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 3, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("BoxMesh_5ioyw")
 surface_material_override/0 = SubResource("StandardMaterial3D_lge5w")
 
-[node name="HingeJoint3D" type="HingeJoint3D" parent="Stage/Swing/SwingingPlatform"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
-node_a = NodePath("..")
-node_b = NodePath("../../Wall4")
+[node name="Slider" type="Node" parent="Stage"]
+
+[node name="Wall" type="StaticBody3D" parent="Stage/Slider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0.5, 2)
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage/Slider/Wall"]
+shape = SubResource("BoxShape3D_3yjvb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Stage/Slider/Wall"]
+mesh = SubResource("BoxMesh_w5jny")
+
+[node name="Wall2" type="StaticBody3D" parent="Stage/Slider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 1.5, 1)
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage/Slider/Wall2"]
+shape = SubResource("BoxShape3D_3yjvb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Stage/Slider/Wall2"]
+mesh = SubResource("BoxMesh_w5jny")
+
+[node name="Wall3" type="StaticBody3D" parent="Stage/Slider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 2.5, 0)
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage/Slider/Wall3"]
+shape = SubResource("BoxShape3D_3yjvb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Stage/Slider/Wall3"]
+mesh = SubResource("BoxMesh_w5jny")
+
+[node name="Wall6" type="StaticBody3D" parent="Stage/Slider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 2.5, -8)
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage/Slider/Wall6"]
+shape = SubResource("BoxShape3D_3yjvb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Stage/Slider/Wall6"]
+mesh = SubResource("BoxMesh_w5jny")
+
+[node name="Wall7" type="StaticBody3D" parent="Stage/Slider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 1.5, -9)
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage/Slider/Wall7"]
+shape = SubResource("BoxShape3D_3yjvb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Stage/Slider/Wall7"]
+mesh = SubResource("BoxMesh_w5jny")
+
+[node name="Wall8" type="StaticBody3D" parent="Stage/Slider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0.5, -10)
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage/Slider/Wall8"]
+shape = SubResource("BoxShape3D_3yjvb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Stage/Slider/Wall8"]
+mesh = SubResource("BoxMesh_w5jny")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="Stage/Slider"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7, 5, -0.5)
+node_a = NodePath("../SlidingPlatform")
+linear_limit/upper_distance = 7.0
+linear_limit/lower_distance = 0.0
+
+[node name="SlidingPlatform" type="RigidBody3D" parent="Stage/Slider" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 5, -0.5)
+collision_mask = 3
+axis_lock_linear_x = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage/Slider/SlidingPlatform"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_ikkht")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Stage/Slider/SlidingPlatform"]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_5ioyw")
+surface_material_override/0 = SubResource("StandardMaterial3D_lge5w")
 
 [node name="ragdoll" parent="." instance=ExtResource("1_d2u2b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
