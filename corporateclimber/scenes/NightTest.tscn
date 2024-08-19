@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://01q8besc7v2x"]
+[gd_scene load_steps=13 format=3 uid="uid://01q8besc7v2x"]
 
 [ext_resource type="PackedScene" uid="uid://dsboxtbpotmu7" path="res://Blocks/MockBuilding.tscn" id="1_8xd8h"]
 [ext_resource type="Environment" uid="uid://mhw5tbhsb0bu" path="res://Lighting/nightEnvironment.tres" id="1_c0l41"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://ddd0dlo2sr2le" path="res://Blocks/Building2.tscn" id="7_38001"]
 [ext_resource type="PackedScene" uid="uid://cpubp5u2t07qn" path="res://Blocks/antenna.tscn" id="8_qq8fx"]
 [ext_resource type="PackedScene" uid="uid://2esuqbhvk1i7" path="res://Blocks/BasicCylinder.tscn" id="9_j54cu"]
+[ext_resource type="PackedScene" uid="uid://cfv2aviop57g" path="res://scenes/main_building.tscn" id="10_5em6d"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nci2j"]
 size = Vector3(111.191, 93.6175, 1)
@@ -146,7 +147,7 @@ transform = Transform3D(-3.56521e-07, 0, 34.5983, 0, 26.1631, 0, -8.15626, 0, -1
 transform = Transform3D(3.36351, 0, 0, 0, 1.17248, 0, 0, 0, 1.95127, -25.6065, -19.4115, 86.8859)
 
 [node name="Building4" parent="RealBuildings/Building3" instance=ExtResource("4_vc5th")]
-transform = Transform3D(0.593511, 0, 0, 0, 0.877156, 0, 0, 0, 1, 0, 91.424, 0)
+transform = Transform3D(0.593511, 0, 0, 0, 0.877156, 0, 0, 0, 1, 0.529547, 98.0523, -0.141731)
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="RealBuildings/Building3/Building4"]
 transform = Transform3D(14.0733, 0, 0, 0, 43.5109, 0, 0, 0, 13.8913, 0, 118.01, 0)
@@ -163,10 +164,13 @@ transform = Transform3D(1.11697, 0, 0, 0, 1, 0, 0, 0, 0.4602, 2.95346, 96.8238, 
 transform = Transform3D(1.11697, 0, 0, 0, 0.545249, 0, 0, 0, 0.209389, 2.95346, 96.8238, -4.58813)
 
 [node name="Building6" parent="RealBuildings" instance=ExtResource("7_38001")]
-transform = Transform3D(2.64496, 0, 0, 0, 0.968886, 0, 0, 0, -1.52859, 63.2766, -9.10599, 88.8305)
+transform = Transform3D(1.20683, 0, 0, 0, 1.26489, 0, 0, 0, -1.52859, 63.2766, -9.10599, 88.8305)
 
 [node name="BasicCylinder" parent="RealBuildings/Building6" instance=ExtResource("9_j54cu")]
 transform = Transform3D(30.5718, 0, 0, 0, 2.10625, 0, 0, 0, 30.4454, 0, 96.507, 0.0704651)
+
+[node name="main_building" parent="RealBuildings" instance=ExtResource("10_5em6d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.236, 0, 6.91)
 
 [editable path="MockBuildings/MockBuilding"]
 [editable path="MockBuildings/MockBuilding2"]

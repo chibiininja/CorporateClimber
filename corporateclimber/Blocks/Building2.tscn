@@ -10,3 +10,4 @@
 transform = Transform3D(30, 0, 0, 0, 50, 0, 0, 0, 30, 0, 50, 0)
 material_override = ExtResource("1_sq45y")
 mesh = SubResource("CylinderMesh_y48l8")
+surface_material_override/0 = ExtResource("1_sq45y")

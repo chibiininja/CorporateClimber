@@ -10,3 +10,4 @@
 transform = Transform3D(20, 0, 0, 0, 100, 0, 0, 0, 20, 0, 50, 0)
 material_override = ExtResource("1_w2bmq")
 mesh = SubResource("BoxMesh_vrn1p")
+surface_material_override/0 = ExtResource("1_w2bmq")
