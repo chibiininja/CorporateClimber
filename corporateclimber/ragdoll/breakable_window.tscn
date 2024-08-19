@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://conxl4qe73nvc"]
+
+[ext_resource type="Script" path="res://ragdoll/breakable.gd" id="1_xd568"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jl67e"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qpqr6"]
+size = Vector3(1, 1, 0.0202085)
+
+[sub_resource type="BoxMesh" id="BoxMesh_si0ad"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_47q6u"]
+
+[node name="BreakableWindow" type="RigidBody3D"]
+script = ExtResource("1_xd568")
+brokenMaterial = SubResource("StandardMaterial3D_jl67e")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.00960422)
+shape = SubResource("BoxShape3D_qpqr6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.04, 0, 0, 0)
+mesh = SubResource("BoxMesh_si0ad")
+surface_material_override/0 = SubResource("StandardMaterial3D_47q6u")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
