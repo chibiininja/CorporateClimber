@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/BUILDING_Tex.glb-93beeba27c1bd942b358769c45af
 
 nodes/root_type="RigidBody3D"
 nodes/root_name=""
-nodes/apply_root_scale=true
+nodes/apply_root_scale=false
 nodes/root_scale=1.0
 nodes/import_as_skeleton_bones=false
 meshes/ensure_tangents=true
