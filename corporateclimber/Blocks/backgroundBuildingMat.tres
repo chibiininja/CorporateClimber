@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://egdo6cn0c0t"]
+
+[ext_resource type="Shader" uid="uid://3y0p32virsh2" path="res://Blocks/backgroundBuilding.tres" id="1_plagk"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_plagk")
+shader_parameter/BuildingColor = Color(0.32549, 0.411765, 0.713726, 1)
+shader_parameter/posterizeAmount = 30.0
+shader_parameter/ColorSpeed = 0.05

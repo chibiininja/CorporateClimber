@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://cpubp5u2t07qn"]
+
+[ext_resource type="Material" uid="uid://ch7rxpmbskwwy" path="res://Blocks/BuildingBaseMat.tres" id="1_jpvcr"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_qmqty"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vnrto"]
+albedo_color = Color(0.364583, 0.33705, 0.33705, 1)
+emission_enabled = true
+emission = Color(0.890625, 0.00231935, 0.00231935, 1)
+emission_energy_multiplier = 1.85
+
+[sub_resource type="BoxMesh" id="BoxMesh_kcvhk"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_pmw8j"]
+
+[node name="Antenna" type="Node3D"]
+
+[node name="Point" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.2066, 0, 0, 0, 31.8741, 0, 0, 0, 1, 0, 34.3734, 0)
+mesh = SubResource("PrismMesh_qmqty")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("1_jpvcr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Point"]
+transform = Transform3D(0.413619, 0, 0, 0, 0.0193031, 0, 0, 0, 0.87763, 0, 0.509, 0)
+material_override = SubResource("StandardMaterial3D_vnrto")
+mesh = SubResource("BoxMesh_kcvhk")
+
+[node name="Base" type="MeshInstance3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 9.1511, 0, 0, 0, 3, 0, 9.73297, 0)
+mesh = SubResource("CylinderMesh_pmw8j")
+surface_material_override/0 = ExtResource("1_jpvcr")

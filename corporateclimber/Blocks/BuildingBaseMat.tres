@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://ch7rxpmbskwwy"]
+
+[resource]
+shading_mode = 2
+albedo_color = Color(0.32549, 0.411765, 0.713726, 1)
+metallic_specular = 0.0
+rim_enabled = true
+rim = 0.59
+rim_tint = 0.86

@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bfmkjvdqoxmnj"]
 
-[ext_resource type="PackedScene" uid="uid://dsboxtbpotmu7" path="res://scenes/MockBuilding.tscn" id="1_tpcub"]
+[ext_resource type="PackedScene" uid="uid://dsboxtbpotmu7" path="res://Blocks/MockBuilding.tscn" id="1_tpcub"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ti6md"]
 size = Vector3(200, 1, 200)

@@ -1,17 +1,12 @@
 [gd_scene load_steps=3 format=3 uid="uid://dos1d5jifd3s6"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_46fpj"]
+[ext_resource type="Material" uid="uid://ch7rxpmbskwwy" path="res://Blocks/BuildingBaseMat.tres" id="1_r2p7d"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_rldxl"]
+[sub_resource type="BoxMesh" id="BoxMesh_46fpj"]
 
 [node name="BasicCube" type="Node3D"]
 
-[node name="Box" type="StaticBody3D" parent="." groups=["CanGrab"]]
-collision_mask = 3
-metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Box"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_46fpj")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Box"]
-shape = SubResource("BoxShape3D_rldxl")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("1_r2p7d")
