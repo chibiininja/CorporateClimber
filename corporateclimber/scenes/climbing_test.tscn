@@ -66,7 +66,7 @@ sky_material = SubResource("PhysicalSkyMaterial_pphau")
 background_mode = 2
 sky = SubResource("Sky_cbgvw")
 
-[node name="ClimbingTest" type="Node3D"]
+[node name="ClimbingTest2" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00428104, 0.0395908, -0.000442505)
 
 [node name="Stage" type="Node3D" parent="."]
