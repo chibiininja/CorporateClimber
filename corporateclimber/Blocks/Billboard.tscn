@@ -1,3 +1,34 @@
-[gd_scene format=3 uid="uid://ckd3b6smegqo2"]
+[gd_scene load_steps=3 format=3 uid="uid://ckd3b6smegqo2"]
+
+[ext_resource type="Material" uid="uid://cnl4bon1c18ts" path="res://Blocks/billboadMat.tres" id="1_8so66"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_cu7wo"]
 
 [node name="Billboard" type="Node3D"]
+
+[node name="Screen" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.6, 0, 0, 0, 0.9, 0, 0, 0, 0.027, 0, 0, 0)
+material_override = ExtResource("1_8so66")
+mesh = SubResource("BoxMesh_cu7wo")
+
+[node name="Bounds" type="Node3D" parent="."]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Bounds"]
+transform = Transform3D(0.05, 0, 0, 0, 1, 0, 0, 0, 0.05, 0.8, 0, 0)
+mesh = SubResource("BoxMesh_cu7wo")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Bounds"]
+transform = Transform3D(0.05, 0, 0, 0, 1, 0, 0, 0, 0.05, -0.8, 0, 0)
+mesh = SubResource("BoxMesh_cu7wo")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Bounds"]
+transform = Transform3D(-2.18557e-09, -1.6, 0, 0.05, -6.99382e-08, 0, 0, 0, 0.05, 0, 0.475, 0)
+mesh = SubResource("BoxMesh_cu7wo")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Bounds"]
+transform = Transform3D(-2.18557e-09, -1.6, 0, 0.05, -6.99382e-08, 0, 0, 0, 0.05, 0, -0.475, 0)
+mesh = SubResource("BoxMesh_cu7wo")
+skeleton = NodePath("../..")

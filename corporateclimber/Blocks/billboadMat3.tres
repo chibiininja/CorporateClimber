@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dcts1wgfmffa8"]
+
+[ext_resource type="Shader" uid="uid://xe3k4uqntdb5" path="res://Blocks/billboard.tres" id="1_ki2hm"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_ki2hm")
+shader_parameter/BuildingColor = Color(1, 1, 1, 1)
+shader_parameter/posterizeAmount = 1.0
+shader_parameter/ColorSpeed = 0.4
