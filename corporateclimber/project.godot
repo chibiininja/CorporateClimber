@@ -13,11 +13,8 @@ config_version=5
 config/name="CorporateClimber"
 run/main_scene="res://scenes/NightTest.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://icon.svg"
-
-[audio]
-
-buses/default_bus_layout="res://sounds/default_bus_layout.tres"
+config/icon="res://CorporateClimberIcon.png"
+config/windows_native_icon="res://icon.ico"
 
 [display]
 
