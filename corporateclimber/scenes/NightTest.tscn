@@ -332,7 +332,7 @@ transform = Transform3D(-0.724857, 0, 0, 0, 2.11339, 0, 0, 0, 3.50311, -120.778,
 transform = Transform3D(36.2831, 0, 0, 0, 2.57729, 0, 0, 0, 30.9769, 0, 98.009, 0)
 
 [node name="robot" parent="." instance=ExtResource("14_pdggs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.50977, 0.0395904, -1.68712)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.50977, 0.0395904, 1.31288)
 walk_speed = 1.0
 walk_animation_speed = 0.7
 walk_animation_angle = 1.0
