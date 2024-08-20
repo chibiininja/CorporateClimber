@@ -13,7 +13,7 @@
 [ext_resource type="Material" uid="uid://ci4i4u4ua1yt0" path="res://Blocks/billboadMat2.tres" id="11_2agfk"]
 [ext_resource type="PackedScene" uid="uid://ckd3b6smegqo2" path="res://Blocks/Billboard.tscn" id="11_e4dt5"]
 [ext_resource type="Material" uid="uid://dcts1wgfmffa8" path="res://Blocks/billboadMat3.tres" id="13_2ri73"]
-[ext_resource type="PackedScene" uid="uid://d0ldee2kfaric" path="res://ragdoll/ragdoll.tscn" id="14_o41o2"]
+[ext_resource type="PackedScene" uid="uid://bdivtfrqxj8to" path="res://ragdoll/robot.tscn" id="14_pdggs"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nci2j"]
 size = Vector3(111.191, 93.6175, 1)
@@ -331,8 +331,12 @@ transform = Transform3D(-0.724857, 0, 0, 0, 2.11339, 0, 0, 0, 3.50311, -120.778,
 [node name="BasicCylinder" parent="RealBuildings/Building12" instance=ExtResource("9_j54cu")]
 transform = Transform3D(36.2831, 0, 0, 0, 2.57729, 0, 0, 0, 30.9769, 0, 98.009, 0)
 
-[node name="ragdoll" parent="RealBuildings" instance=ExtResource("14_o41o2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.88093, 0.0395908, -0.76552)
+[node name="robot" parent="." instance=ExtResource("14_pdggs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.50977, 0.0395904, -1.68712)
+walk_speed = 1.0
+walk_animation_speed = 0.7
+walk_animation_angle = 1.0
+jump_strength = 300.0
 
 [editable path="MockBuildings/MockBuilding"]
 [editable path="MockBuildings/MockBuilding2"]
