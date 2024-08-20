@@ -102,7 +102,7 @@ visible = false
 shape = SubResource("BoxShape3D_nci2j")
 
 [node name="Building1" parent="RealBuildings" instance=ExtResource("4_vc5th")]
-transform = Transform3D(1.67671, 0, 0, 0, 0.979963, 0, 0, 0, 1.95127, 40.2907, 0.542999, 0.785608)
+transform = Transform3D(1.67671, 0, 0, 0, 0.979963, 0, 0, 0, 1.95127, 40.291, 0, 0.786)
 
 [node name="BasicCube" parent="RealBuildings/Building1" instance=ExtResource("5_ko2sa")]
 transform = Transform3D(10.6006, 0, 0, 0, 4.73546, 0, 0, 0, 9.65609, 1.30231, 100.244, -2.60919)
@@ -117,7 +117,7 @@ transform = Transform3D(23.2288, 0, 0, 0, -7.13276, 0, 0, 0, 22.2401, 0, 75.2409
 transform = Transform3D(23.2288, 0, 0, 0, -7.13276, 0, 0, 0, 22.2401, -0.153372, 102.449, 0.258339)
 
 [node name="Building5" parent="RealBuildings" instance=ExtResource("4_vc5th")]
-transform = Transform3D(2.12739, 0, 0, 0, 1.41867, 0, 0, 0, 2.47575, -14.7127, -10.6358, -71.812)
+transform = Transform3D(2.12739, 0, 0, 0, 1.41867, 0, 0, 0, 2.47575, -14.713, 0, -71.812)
 
 [node name="BasicCube" parent="RealBuildings/Building5" instance=ExtResource("5_ko2sa")]
 transform = Transform3D(10.6006, 0, 0, 0, 4.73546, 0, 0, 0, 9.65609, 1.30231, 100.244, -2.60919)
@@ -129,6 +129,21 @@ transform = Transform3D(23.2288, 0, 0, 0, -7.13276, 0, 0, 0, 22.2401, 0, 36.5399
 transform = Transform3D(23.2288, 0, 0, 0, -7.13276, 0, 0, 0, 22.2401, 0, 75.2409, 0)
 
 [node name="BasicCube4" parent="RealBuildings/Building5" instance=ExtResource("5_ko2sa")]
+transform = Transform3D(23.2288, 0, 0, 0, -7.13276, 0, 0, 0, 22.2401, -0.153372, 102.449, 0.258339)
+
+[node name="Building7" parent="RealBuildings" instance=ExtResource("4_vc5th")]
+transform = Transform3D(2.92088, 0, 0, 0, 2.15909, 0, 0, 0, 2.47575, 64.5564, -10.6358, -60.7387)
+
+[node name="BasicCube" parent="RealBuildings/Building7" instance=ExtResource("5_ko2sa")]
+transform = Transform3D(10.6006, 0, 0, 0, 4.73546, 0, 0, 0, 9.65609, 1.30231, 100.244, -2.60919)
+
+[node name="BasicCube2" parent="RealBuildings/Building7" instance=ExtResource("5_ko2sa")]
+transform = Transform3D(23.2288, 0, 0, 0, -7.13276, 0, 0, 0, 22.2401, 0, 36.5399, 0)
+
+[node name="BasicCube3" parent="RealBuildings/Building7" instance=ExtResource("5_ko2sa")]
+transform = Transform3D(23.2288, 0, 0, 0, -7.13276, 0, 0, 0, 22.2401, 0, 75.2409, 0)
+
+[node name="BasicCube4" parent="RealBuildings/Building7" instance=ExtResource("5_ko2sa")]
 transform = Transform3D(23.2288, 0, 0, 0, -7.13276, 0, 0, 0, 22.2401, -0.153372, 102.449, 0.258339)
 
 [node name="Building4" parent="RealBuildings" instance=ExtResource("4_vc5th")]
@@ -144,15 +159,21 @@ transform = Transform3D(8.15626, 0, 0, 0, 26.1631, 0, 0, 0, 25.9736, -13.8078, 1
 transform = Transform3D(-3.56521e-07, 0, 34.5983, 0, 26.1631, 0, -8.15626, 0, -1.51234e-06, 0.196421, 13.5158, 13.0751)
 
 [node name="Building3" parent="RealBuildings" instance=ExtResource("4_vc5th")]
-transform = Transform3D(3.36351, 0, 0, 0, 1.17248, 0, 0, 0, 1.95127, -25.6065, -19.4115, 86.8859)
+transform = Transform3D(3.36351, 0, 0, 0, 1.4261, 0, 0, 0, 2.67178, -25.6065, -19.4115, 86.8859)
 
 [node name="Building4" parent="RealBuildings/Building3" instance=ExtResource("4_vc5th")]
-transform = Transform3D(0.593511, 0, 0, 0, 0.877156, 0, 0, 0, 1, 0.529547, 98.0523, -0.141731)
+transform = Transform3D(0.591832, 0, 0, 0, 0.582869, 0, 0, 0, 0.702093, 0.529547, 98.0523, -0.141731)
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="RealBuildings/Building3/Building4"]
 transform = Transform3D(14.0733, 0, 0, 0, 43.5109, 0, 0, 0, 13.8913, 0, 118.01, 0)
 mesh = SubResource("PrismMesh_fjby2")
 surface_material_override/0 = ExtResource("6_yuqyx")
+
+[node name="BasicCube2" parent="RealBuildings/Building3/Building4" instance=ExtResource("5_ko2sa")]
+transform = Transform3D(20.8862, 0, 0, 0, 1.14005, 0, 0, 0, 20.6251, -0.329592, 100.109, 0.201302)
+
+[node name="BasicCube" parent="RealBuildings/Building3" instance=ExtResource("5_ko2sa")]
+transform = Transform3D(20.8893, 0, 0, 0, 1, 0, 0, 0, 20.925, 0, 99.5461, 0)
 
 [node name="Building2" parent="RealBuildings" instance=ExtResource("7_38001")]
 transform = Transform3D(0.89528, 0, 0, 0, 1, 0, 0, 0, 2.17297, -37.4727, 0, 0)
@@ -163,6 +184,9 @@ transform = Transform3D(1.11697, 0, 0, 0, 1, 0, 0, 0, 0.4602, 2.95346, 96.8238, 
 [node name="Antenna2" parent="RealBuildings/Building2" instance=ExtResource("8_qq8fx")]
 transform = Transform3D(1.11697, 0, 0, 0, 0.545249, 0, 0, 0, 0.209389, 2.95346, 96.8238, -4.58813)
 
+[node name="BasicCylinder" parent="RealBuildings/Building2" instance=ExtResource("9_j54cu")]
+transform = Transform3D(-29.9717, 0, 0, 0, 1, 0, 0, 0, 31.2909, 0, 99.9775, 0)
+
 [node name="Building6" parent="RealBuildings" instance=ExtResource("7_38001")]
 transform = Transform3D(1.20683, 0, 0, 0, 1.26489, 0, 0, 0, -1.52859, 63.2766, -9.10599, 88.8305)
 
@@ -171,6 +195,114 @@ transform = Transform3D(30.5718, 0, 0, 0, 2.10625, 0, 0, 0, 30.4454, 0, 96.507, 
 
 [node name="main_building" parent="RealBuildings" instance=ExtResource("10_5em6d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.236, 0, 6.91)
+
+[node name="Building8" parent="RealBuildings" instance=ExtResource("7_38001")]
+transform = Transform3D(-3.89517, 0, 0, 0, 1.17817, 0, 0, 0, 1.9108, 33.0055, 1.74841, 163.092)
+
+[node name="BasicCube" parent="RealBuildings" instance=ExtResource("5_ko2sa")]
+transform = Transform3D(46.2139, 0, 0, 0, 87.489, 0, 0, 0, 53.8238, 32.5278, 17.9191, -150.594)
+
+[node name="Antenna" parent="RealBuildings/BasicCube" instance=ExtResource("8_qq8fx")]
+transform = Transform3D(0.0655714, 0, 0, 0, 0.020724, 0, 0, 0, 0.0643767, 0, 1.42018, 0)
+
+[node name="Antenna2" parent="RealBuildings/BasicCube" instance=ExtResource("8_qq8fx")]
+transform = Transform3D(0.0655714, 0, 0, 0, 0.0114758, 0, 0, 0, 0.0456965, 0, 1.42019, 0.310043)
+
+[node name="Building9" parent="RealBuildings/BasicCube" instance=ExtResource("4_vc5th")]
+transform = Transform3D(0.0285714, 0, 0, 0, 0.01, 0, 0, 0, 0.0285714, 0.394278, -0.524122, 0.388821)
+
+[node name="Building10" parent="RealBuildings/BasicCube" instance=ExtResource("4_vc5th")]
+transform = Transform3D(0.0285714, 0, 0, 0, 0.01, 0, 0, 0, 0.0285714, 0.394278, -0.524122, -0.446513)
+
+[node name="Building11" parent="RealBuildings/BasicCube" instance=ExtResource("4_vc5th")]
+transform = Transform3D(0.0285714, 0, 0, 0, 0.01, 0, 0, 0, 0.0285714, -0.389112, -0.524122, 0.388821)
+
+[node name="Building12" parent="RealBuildings/BasicCube" instance=ExtResource("4_vc5th")]
+transform = Transform3D(0.0285714, 0, 0, 0, 0.01, 0, 0, 0, 0.0285714, -0.389112, -0.524122, -0.446513)
+
+[node name="BasicCube2" parent="RealBuildings/BasicCube" instance=ExtResource("5_ko2sa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Building9" parent="RealBuildings/BasicCube/BasicCube2" instance=ExtResource("4_vc5th")]
+transform = Transform3D(0.0285714, 0, 0, 0, 0.01, 0, 0, 0, 0.0285714, 0.394278, -0.524122, 0.388821)
+
+[node name="Building10" parent="RealBuildings/BasicCube/BasicCube2" instance=ExtResource("4_vc5th")]
+transform = Transform3D(0.0285714, 0, 0, 0, 0.01, 0, 0, 0, 0.0285714, 0.394278, -0.524122, -0.446513)
+
+[node name="Building11" parent="RealBuildings/BasicCube/BasicCube2" instance=ExtResource("4_vc5th")]
+transform = Transform3D(0.0285714, 0, 0, 0, 0.01, 0, 0, 0, 0.0285714, -0.389112, -0.524122, 0.388821)
+
+[node name="Building12" parent="RealBuildings/BasicCube/BasicCube2" instance=ExtResource("4_vc5th")]
+transform = Transform3D(0.0285714, 0, 0, 0, 0.01, 0, 0, 0, 0.0285714, -0.389112, -0.524122, -0.446513)
+
+[node name="BasicCube2" parent="RealBuildings" instance=ExtResource("5_ko2sa")]
+transform = Transform3D(-1.71122e-06, 0, 53.8238, 0, 124.478, 0, -39.1482, 0, -2.35271e-06, -123.488, 48.2383, -35.8823)
+
+[node name="Antenna" parent="RealBuildings/BasicCube2" instance=ExtResource("8_qq8fx")]
+transform = Transform3D(0.0655714, 0, 0, 0, 0.0128309, 0, 0, 0, 0.0643767, 0, 1.42018, 0)
+
+[node name="Antenna2" parent="RealBuildings/BasicCube2" instance=ExtResource("8_qq8fx")]
+transform = Transform3D(0.0655714, 0, 0, 0, 0.00675429, 0, 0, 0, 0.0456965, 0, 1.42019, 0.310043)
+
+[node name="Building9" parent="RealBuildings/BasicCube2" instance=ExtResource("4_vc5th")]
+transform = Transform3D(0.0285714, 0, 0, 0, 0.01, 0, 0, 0, 0.0285714, 0.394278, -0.524122, 0.388821)
+
+[node name="Building10" parent="RealBuildings/BasicCube2" instance=ExtResource("4_vc5th")]
+transform = Transform3D(0.0285714, 0, 0, 0, 0.01, 0, 0, 0, 0.0285714, 0.394278, -0.524122, -0.446513)
+
+[node name="Building11" parent="RealBuildings/BasicCube2" instance=ExtResource("4_vc5th")]
+transform = Transform3D(0.0285714, 0, 0, 0, 0.01, 0, 0, 0, 0.0285714, -0.389112, -0.524122, 0.388821)
+
+[node name="Building12" parent="RealBuildings/BasicCube2" instance=ExtResource("4_vc5th")]
+transform = Transform3D(0.0285714, 0, 0, 0, 0.01, 0, 0, 0, 0.0285714, -0.389112, -0.524122, -0.446513)
+
+[node name="BasicCube2" parent="RealBuildings/BasicCube2" instance=ExtResource("5_ko2sa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Building9" parent="RealBuildings/BasicCube2/BasicCube2" instance=ExtResource("4_vc5th")]
+transform = Transform3D(0.0285714, 0, 0, 0, 0.01, 0, 0, 0, 0.0285714, 0.394278, -0.524122, 0.388821)
+
+[node name="Building10" parent="RealBuildings/BasicCube2/BasicCube2" instance=ExtResource("4_vc5th")]
+transform = Transform3D(0.0285714, 0, 0, 0, 0.01, 0, 0, 0, 0.0285714, 0.394278, -0.524122, -0.446513)
+
+[node name="Building11" parent="RealBuildings/BasicCube2/BasicCube2" instance=ExtResource("4_vc5th")]
+transform = Transform3D(0.0285714, 0, 0, 0, 0.01, 0, 0, 0, 0.0285714, -0.389112, -0.524122, 0.388821)
+
+[node name="Building12" parent="RealBuildings/BasicCube2/BasicCube2" instance=ExtResource("4_vc5th")]
+transform = Transform3D(0.0285714, 0, 0, 0, 0.01, 0, 0, 0, 0.0285714, -0.389112, -0.524122, -0.446513)
+
+[node name="Building9" parent="RealBuildings" instance=ExtResource("4_vc5th")]
+transform = Transform3D(3.24808, 0, 0, 0, 1.42629, 0, 0, 0, 2.2314, -65.6053, 0, -146.925)
+
+[node name="BasicCube3" parent="RealBuildings/Building9" instance=ExtResource("5_ko2sa")]
+transform = Transform3D(17.2582, 0, 0, 0, 21.617, 0, 0, 0, 13.8285, 0, 104.738, 0)
+
+[node name="BasicCube4" parent="RealBuildings/Building9" instance=ExtResource("5_ko2sa")]
+transform = Transform3D(10.4149, 0, 0, 0, 18.7209, 0, 0, 0, 10.6037, 0, 120.845, 0)
+
+[node name="Building10" parent="RealBuildings" instance=ExtResource("7_38001")]
+transform = Transform3D(1.58732, 0, 0, 0, 0.986446, 0, 0, 0, 1.98872, -131.013, 0, -116.749)
+
+[node name="Building11" parent="RealBuildings/Building10" instance=ExtResource("7_38001")]
+transform = Transform3D(0.867035, 0, 0, 0, 0.689404, 0, 0, 0, 0.734451, 0, 96.6766, 0)
+
+[node name="BasicCylinder" parent="RealBuildings/Building10" instance=ExtResource("9_j54cu")]
+transform = Transform3D(18, 0, 0, 0, 13, 0, 0, 0, 18, 0, 163.089, 0)
+
+[node name="BasicCylinder3" parent="RealBuildings/Building10" instance=ExtResource("9_j54cu")]
+transform = Transform3D(0.0933109, 0, 0, 0, 28.3508, 0, 0, 0, 4.57722, 0, 187.198, 0)
+
+[node name="BasicCylinder2" parent="RealBuildings/Building10" instance=ExtResource("9_j54cu")]
+transform = Transform3D(28.8974, 0, 0, 0, 2.63057, 0, 0, 0, 22.0599, 0, 163.089, 0)
+
+[node name="Building11" parent="RealBuildings" instance=ExtResource("4_vc5th")]
+transform = Transform3D(3.47235, 0, 0, 0, 1.6769, 0, 0, 0, 5.06148, -106.678, 0, 172.492)
+
+[node name="Building12" parent="RealBuildings" instance=ExtResource("7_38001")]
+transform = Transform3D(-0.724857, 0, 0, 0, 2.11339, 0, 0, 0, 3.50311, -120.778, 0, 57.9774)
+
+[node name="BasicCylinder" parent="RealBuildings/Building12" instance=ExtResource("9_j54cu")]
+transform = Transform3D(36.2831, 0, 0, 0, 2.57729, 0, 0, 0, 30.9769, 0, 98.009, 0)
 
 [editable path="MockBuildings/MockBuilding"]
 [editable path="MockBuildings/MockBuilding2"]
