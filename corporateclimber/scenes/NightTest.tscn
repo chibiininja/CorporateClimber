@@ -332,7 +332,7 @@ transform = Transform3D(-0.724857, 0, 0, 0, 2.11339, 0, 0, 0, 3.50311, -120.778,
 transform = Transform3D(36.2831, 0, 0, 0, 2.57729, 0, 0, 0, 30.9769, 0, 98.009, 0)
 
 [node name="ragdoll" parent="RealBuildings" instance=ExtResource("14_o41o2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.11907, 0.0395908, 1.23448)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.88093, 0.0395908, -0.76552)
 
 [editable path="MockBuildings/MockBuilding"]
 [editable path="MockBuildings/MockBuilding2"]
