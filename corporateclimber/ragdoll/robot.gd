@@ -38,6 +38,12 @@ var ragdoll_mode = false
 var left_foot_active: bool = false
 var right_foot_active: bool = false
 
+@onready var left_grip_sound: AudioStreamPlayer3D = $"Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone mixamorig_LeftForeArm/GrabJoint/LeftGripSound"
+@onready var left_release_sound: AudioStreamPlayer3D = $"Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone mixamorig_LeftForeArm/GrabJoint/LeftReleaseSound"
+@onready var right_grip_sound: AudioStreamPlayer3D = $"Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone mixamorig_RightForeArm/GrabJoint/RightGripSound"
+@onready var right_release_sound: AudioStreamPlayer3D = $"Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone mixamorig_RightForeArm/GrabJoint/RightReleaseSound"
+
+
 func _ready() -> void:
 	$Armature/Skeleton3D/PhysicalBoneSimulator3D.physical_bones_start_simulation()
 
@@ -70,6 +76,8 @@ func HandleGrab():
 		left_hand_active = false
 		left_grab_joint.set_node_a("")
 		left_grab_joint.set_node_b("")
+		if left_hand_grab:
+			left_release_sound.play()
 		left_hand_grab = null
 	
 	if Input.is_action_pressed("right_mouse") and not ragdoll_mode:
@@ -93,6 +101,8 @@ func HandleGrab():
 		right_hand_active = false
 		right_grab_joint.set_node_a("")
 		right_grab_joint.set_node_b("")
+		if right_hand_grab:
+			right_release_sound.play()
 		right_hand_grab = null
 
 func HandleKick():
@@ -217,6 +227,7 @@ func _on_RightHand_body_entered(body: Node3D) -> void:
 				right_grab_joint.set_node_a(right_hand.get_path())
 				right_grab_joint.set_node_b(body.get_path())
 				right_hand_grab = body
+				right_grip_sound.play()
 				print("Right hand grabbing " + body.name)
 
 
@@ -227,6 +238,7 @@ func _on_LeftHand_body_entered(body: Node3D) -> void:
 				left_grab_joint.set_node_a(left_hand.get_path())
 				left_grab_joint.set_node_b(body.get_path())
 				left_hand_grab = body
+				left_grip_sound.play()
 				print("Left hand grabbing " + body.name)
 
 

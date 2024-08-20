@@ -12,3 +12,4 @@ func Break():
 	isBroken = true
 	
 	mesh_instance_3d.set_surface_override_material(0, brokenMaterial)
+	$AudioStreamPlayer3D.play()

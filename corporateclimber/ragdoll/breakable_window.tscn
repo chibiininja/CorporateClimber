@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://conxl4qe73nvc"]
+[gd_scene load_steps=8 format=3 uid="uid://conxl4qe73nvc"]
 
 [ext_resource type="Script" path="res://ragdoll/breakable.gd" id="1_xd568"]
 [ext_resource type="Texture2D" uid="uid://d0g25s8yu1vlr" path="res://ragdoll/brokenglass.png" id="2_bv53o"]
 [ext_resource type="Material" uid="uid://caska7q5of1v4" path="res://ragdoll/breakable_window.tres" id="3_7grnm"]
+[ext_resource type="AudioStream" uid="uid://bns7m7tu1ma7q" path="res://sounds/windowBreak.wav" id="4_p7h1g"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_01jga"]
 albedo_texture = ExtResource("2_bv53o")
@@ -34,3 +35,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 
 node_a = NodePath("..")
 linear_limit/upper_distance = 0.0
 linear_limit/lower_distance = 0.0
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_p7h1g")
+bus = &"SFX"

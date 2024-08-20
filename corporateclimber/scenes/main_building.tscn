@@ -732,7 +732,7 @@ linear_limit/upper_distance = 0.0
 linear_limit/lower_distance = 0.0
 
 [node name="GrabPanel22" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -11.2, 26.7644, -0.734169)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -11.2, 26.7644, -0.868443)
 collision_mask = 2
 axis_lock_linear_y = true
 axis_lock_linear_z = true
@@ -749,6 +749,50 @@ mesh = SubResource("BoxMesh_ppf5l")
 surface_material_override/0 = ExtResource("2_q6xbd")
 
 [node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabPanel22"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabPanel37" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, -10.6686, 26.7644, -0.00646353)
+collision_mask = 2
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabPanel37"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_thf7n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabPanel37"]
+mesh = SubResource("BoxMesh_ppf5l")
+surface_material_override/0 = ExtResource("2_q6xbd")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabPanel37"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabPanel38" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, -9.90754, 26.9297, -0.00646353)
+collision_mask = 2
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabPanel38"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_thf7n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabPanel38"]
+mesh = SubResource("BoxMesh_ppf5l")
+surface_material_override/0 = ExtResource("2_q6xbd")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabPanel38"]
 node_a = NodePath("..")
 linear_limit/upper_distance = 0.0
 linear_limit/lower_distance = 0.0

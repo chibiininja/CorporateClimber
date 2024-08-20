@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://01q8besc7v2x"]
+[gd_scene load_steps=24 format=3 uid="uid://01q8besc7v2x"]
 
 [ext_resource type="PackedScene" uid="uid://dsboxtbpotmu7" path="res://Blocks/MockBuilding.tscn" id="1_8xd8h"]
 [ext_resource type="Environment" uid="uid://mhw5tbhsb0bu" path="res://Lighting/nightEnvironment.tres" id="1_c0l41"]
@@ -14,6 +14,13 @@
 [ext_resource type="PackedScene" uid="uid://ckd3b6smegqo2" path="res://Blocks/Billboard.tscn" id="11_e4dt5"]
 [ext_resource type="Material" uid="uid://dcts1wgfmffa8" path="res://Blocks/billboadMat3.tres" id="13_2ri73"]
 [ext_resource type="PackedScene" uid="uid://bdivtfrqxj8to" path="res://ragdoll/robot.tscn" id="14_pdggs"]
+[ext_resource type="AudioStream" uid="uid://b77ulhfjlxkij" path="res://sounds/cityHum.wav" id="15_efmed"]
+[ext_resource type="Script" path="res://sounds/sounds.gd" id="15_v53st"]
+[ext_resource type="AudioStream" uid="uid://c3s1hr71dloq7" path="res://sounds/climbingHouseMusic.wav" id="16_371tl"]
+[ext_resource type="AudioStream" uid="uid://c6h8mfbim5h81" path="res://sounds/wind.wav" id="17_gydb7"]
+[ext_resource type="AudioStream" uid="uid://d0hfkyeyyt875" path="res://sounds/car.wav" id="19_6r4gl"]
+[ext_resource type="AudioStream" uid="uid://bvjvoyjeyj2cu" path="res://sounds/siren.wav" id="20_lm6a8"]
+[ext_resource type="AudioStream" uid="uid://bkpxfpulsoa6k" path="res://sounds/sirenTwo.wav" id="21_05e11"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nci2j"]
 size = Vector3(111.191, 93.6175, 1)
@@ -337,6 +344,43 @@ walk_speed = 1.0
 walk_animation_speed = 0.7
 walk_animation_angle = 1.0
 jump_strength = 300.0
+
+[node name="Sounds" type="Node3D" parent="." node_paths=PackedStringArray("random_sounds")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16)
+script = ExtResource("15_v53st")
+random_sounds = [NodePath("Car"), NodePath("Siren"), NodePath("Siren2")]
+
+[node name="ClimbingHouseMusic" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("16_371tl")
+autoplay = true
+bus = &"Music"
+
+[node name="Wind" type="AudioStreamPlayer3D" parent="Sounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 70, 0)
+stream = ExtResource("17_gydb7")
+bus = &"LoopingSFX"
+
+[node name="CityHum" type="AudioStreamPlayer3D" parent="Sounds"]
+stream = ExtResource("15_efmed")
+bus = &"LoopingSFX"
+
+[node name="Car" type="AudioStreamPlayer3D" parent="Sounds"]
+stream = ExtResource("19_6r4gl")
+bus = &"SFX"
+
+[node name="Siren" type="AudioStreamPlayer3D" parent="Sounds"]
+stream = ExtResource("20_lm6a8")
+bus = &"SFX"
+
+[node name="Siren2" type="AudioStreamPlayer3D" parent="Sounds"]
+stream = ExtResource("21_05e11")
+bus = &"SFX"
+
+[node name="Timer" type="Timer" parent="Sounds"]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="Sounds/Timer" to="Sounds" method="_on_timer_timeout"]
 
 [editable path="MockBuildings/MockBuilding"]
 [editable path="MockBuildings/MockBuilding2"]
