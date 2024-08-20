@@ -1,17 +1,7 @@
-[gd_scene load_steps=32 format=3 uid="uid://cfv2aviop57g"]
+[gd_scene load_steps=37 format=3 uid="uid://cfv2aviop57g"]
 
 [ext_resource type="PackedScene" uid="uid://conxl4qe73nvc" path="res://ragdoll/breakable_window.tscn" id="1_7olci"]
 [ext_resource type="ArrayMesh" uid="uid://58n5n43fqhdu" path="res://Blocks/building.res" id="2_75gvm"]
-[ext_resource type="PackedScene" uid="uid://d0ldee2kfaric" path="res://ragdoll/ragdoll.tscn" id="2_ogaf4"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_ipe1p"]
-size = Vector3(5, 1, 5)
-
-[sub_resource type="BoxMesh" id="BoxMesh_jbllw"]
-size = Vector3(5, 1, 5)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w8twn"]
-albedo_color = Color(0.262466, 0.221741, 0.41398, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mxhf3"]
 size = Vector3(500, 1, 500)
@@ -30,6 +20,14 @@ size = Vector3(2, 2, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_ppf5l"]
 size = Vector3(0.2, 0.2, 0.1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vungf"]
+radius = 0.1
+height = 4.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_2jx01"]
+radius = 0.1
+height = 4.0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_urhsu"]
 height = 10.0
@@ -158,27 +156,57 @@ size = Vector3(0.1, 2, 0.1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4ps0e"]
 albedo_color = Color(0.235732, 0.235732, 0.235732, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_4t21k"]
+size = Vector3(2, 1, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_n0qw1"]
+size = Vector3(2, 1, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7lrps"]
+albedo_color = Color(0.778938, 0.726127, 0.91781, 1)
+
+[sub_resource type="Animation" id="Animation_a6tat"]
+resource_name = "spring"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4.5, 5),
+"transitions": PackedFloat32Array(0.2, 0.25, 1),
+"update": 0,
+"values": [Vector3(0, 2, 0), Vector3(0, -1, 0), Vector3(0, 2, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_kdbv4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 2, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gk6ql"]
+_data = {
+"RESET": SubResource("Animation_kdbv4"),
+"spring": SubResource("Animation_a6tat")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tu75l"]
+albedo_color = Color(0.153077, 0.153077, 0.153077, 1)
+
 [node name="main_building" type="Node3D"]
-
-[node name="Temporary" type="Node3D" parent="."]
-
-[node name="ragdoll" parent="Temporary" instance=ExtResource("2_ogaf4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.3631, 25.7183, -4)
-walk_speed = 1.5
-
-[node name="TestPlatform" type="StaticBody3D" parent="Temporary/ragdoll"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-collision_mask = 3
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Temporary/ragdoll/TestPlatform"]
-shape = SubResource("BoxShape3D_ipe1p")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Temporary/ragdoll/TestPlatform"]
-mesh = SubResource("BoxMesh_jbllw")
-surface_material_override/0 = SubResource("StandardMaterial3D_w8twn")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Temporary"]
-transform = Transform3D(0.54841, -0.349531, -0.759654, 0, -0.90845, 0.417994, -0.83621, -0.229232, -0.498203, 0, 0, 0)
 
 [node name="Floor" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00428104, 0.0395908, -0.000442505)
@@ -207,7 +235,7 @@ shape = SubResource("ConcavePolygonShape3D_64k7f")
 
 [node name="GrabPanel" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2.04, -1.6)
-collision_mask = 3
+collision_mask = 2
 axis_lock_linear_y = true
 axis_lock_linear_z = true
 axis_lock_angular_x = true
@@ -228,7 +256,7 @@ linear_limit/lower_distance = 0.0
 
 [node name="GrabPanel2" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.05484, 2.64338, -1.6)
-collision_mask = 3
+collision_mask = 2
 axis_lock_linear_y = true
 axis_lock_linear_z = true
 axis_lock_angular_x = true
@@ -249,7 +277,7 @@ linear_limit/lower_distance = 0.0
 
 [node name="GrabPanel3" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.61699, 3.39181, -1.6)
-collision_mask = 3
+collision_mask = 2
 axis_lock_linear_y = true
 axis_lock_linear_z = true
 axis_lock_angular_x = true
@@ -270,7 +298,7 @@ linear_limit/lower_distance = 0.0
 
 [node name="GrabPanel4" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.53262, 3.93072, -1.6)
-collision_mask = 3
+collision_mask = 2
 axis_lock_linear_y = true
 axis_lock_linear_z = true
 axis_lock_angular_x = true
@@ -291,7 +319,7 @@ linear_limit/lower_distance = 0.0
 
 [node name="GrabPanel5" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.79867, 4.92728, -1.6)
-collision_mask = 3
+collision_mask = 2
 axis_lock_linear_y = true
 axis_lock_linear_z = true
 axis_lock_angular_x = true
@@ -312,7 +340,7 @@ linear_limit/lower_distance = 0.0
 
 [node name="GrabPanel6" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.49258, 6.0189, -1.6)
-collision_mask = 3
+collision_mask = 2
 axis_lock_linear_y = true
 axis_lock_linear_z = true
 axis_lock_angular_x = true
@@ -333,7 +361,7 @@ linear_limit/lower_distance = 0.0
 
 [node name="GrabPanel7" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.43866, 6.81028, -1.6)
-collision_mask = 3
+collision_mask = 2
 axis_lock_linear_y = true
 axis_lock_linear_z = true
 axis_lock_angular_x = true
@@ -354,7 +382,7 @@ linear_limit/lower_distance = 0.0
 
 [node name="GrabPanel13" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.548, 7.21084, -1.6)
-collision_mask = 3
+collision_mask = 2
 axis_lock_linear_y = true
 axis_lock_linear_z = true
 axis_lock_angular_x = true
@@ -375,7 +403,7 @@ linear_limit/lower_distance = 0.0
 
 [node name="GrabPanel8" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.0929, 7.75361, -1.6)
-collision_mask = 3
+collision_mask = 2
 axis_lock_linear_y = true
 axis_lock_linear_z = true
 axis_lock_angular_x = true
@@ -396,7 +424,7 @@ linear_limit/lower_distance = 0.0
 
 [node name="GrabPanel9" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.69763, 8.51678, -1.6)
-collision_mask = 3
+collision_mask = 2
 axis_lock_linear_y = true
 axis_lock_linear_z = true
 axis_lock_angular_x = true
@@ -417,7 +445,7 @@ linear_limit/lower_distance = 0.0
 
 [node name="GrabPanel10" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.3901, 9.49836, -1.6)
-collision_mask = 3
+collision_mask = 2
 axis_lock_linear_y = true
 axis_lock_linear_z = true
 axis_lock_angular_x = true
@@ -438,7 +466,7 @@ linear_limit/lower_distance = 0.0
 
 [node name="GrabPanel11" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.3076, 9.99358, -1.6)
-collision_mask = 3
+collision_mask = 2
 axis_lock_linear_y = true
 axis_lock_linear_z = true
 axis_lock_angular_x = true
@@ -459,7 +487,7 @@ linear_limit/lower_distance = 0.0
 
 [node name="GrabPanel12" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.89807, 10.8929, -1.6)
-collision_mask = 3
+collision_mask = 2
 axis_lock_linear_y = true
 axis_lock_linear_z = true
 axis_lock_angular_x = true
@@ -480,7 +508,7 @@ linear_limit/lower_distance = 0.0
 
 [node name="GrabPanel14" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.26242, 21.3931, -1.6)
-collision_mask = 3
+collision_mask = 2
 axis_lock_linear_y = true
 axis_lock_linear_z = true
 axis_lock_angular_x = true
@@ -501,7 +529,7 @@ linear_limit/lower_distance = 0.0
 
 [node name="GrabPanel15" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.26242, 20.6737, -1.6)
-collision_mask = 3
+collision_mask = 2
 axis_lock_linear_y = true
 axis_lock_linear_z = true
 axis_lock_angular_x = true
@@ -522,7 +550,7 @@ linear_limit/lower_distance = 0.0
 
 [node name="GrabPanel16" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.65642, 19.7365, -1.6)
-collision_mask = 3
+collision_mask = 2
 axis_lock_linear_y = true
 axis_lock_linear_z = true
 axis_lock_angular_x = true
@@ -543,7 +571,7 @@ linear_limit/lower_distance = 0.0
 
 [node name="GrabPanel17" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.39212, 23.0235, -1.6)
-collision_mask = 3
+collision_mask = 2
 axis_lock_linear_y = true
 axis_lock_linear_z = true
 axis_lock_angular_x = true
@@ -564,7 +592,7 @@ linear_limit/lower_distance = 0.0
 
 [node name="GrabPanel18" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.3433, 23.5654, -1.6)
-collision_mask = 3
+collision_mask = 2
 axis_lock_linear_y = true
 axis_lock_linear_z = true
 axis_lock_angular_x = true
@@ -585,7 +613,7 @@ linear_limit/lower_distance = 0.0
 
 [node name="GrabPanel19" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.82655, 24.4093, -1.6)
-collision_mask = 3
+collision_mask = 2
 axis_lock_linear_y = true
 axis_lock_linear_z = true
 axis_lock_angular_x = true
@@ -606,7 +634,7 @@ linear_limit/lower_distance = 0.0
 
 [node name="GrabPanel20" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
 transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, -10.9764, 24.9085, -1.2482)
-collision_mask = 3
+collision_mask = 2
 axis_lock_linear_y = true
 axis_lock_linear_z = true
 axis_lock_angular_x = true
@@ -627,7 +655,7 @@ linear_limit/lower_distance = 0.0
 
 [node name="GrabPanel21" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
 transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -11.428, 25.8937, -1.24865)
-collision_mask = 3
+collision_mask = 2
 axis_lock_linear_y = true
 axis_lock_linear_z = true
 axis_lock_angular_x = true
@@ -648,7 +676,7 @@ linear_limit/lower_distance = 0.0
 
 [node name="GrabPanel22" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -11.2, 26.7644, -0.734169)
-collision_mask = 3
+collision_mask = 2
 axis_lock_linear_y = true
 axis_lock_linear_z = true
 axis_lock_angular_x = true
@@ -663,6 +691,696 @@ shape = SubResource("BoxShape3D_thf7n")
 mesh = SubResource("BoxMesh_ppf5l")
 
 [node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabPanel22"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabBar" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 51.409, 8.7)
+collision_mask = 2
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabBar"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_vungf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabBar"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_2jx01")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabBar"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabBar2" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 52.409, 8.7)
+collision_mask = 2
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabBar2"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_vungf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabBar2"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_2jx01")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabBar2"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabBar3" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 53.409, 8.7)
+collision_mask = 2
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabBar3"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_vungf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabBar3"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_2jx01")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabBar3"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabBar4" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 54.409, 8.7)
+collision_mask = 2
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabBar4"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_vungf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabBar4"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_2jx01")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabBar4"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabBar5" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 55.409, 8.7)
+collision_mask = 2
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabBar5"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_vungf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabBar5"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_2jx01")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabBar5"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabBar6" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 56.409, 7.45)
+collision_mask = 2
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabBar6"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_vungf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabBar6"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_2jx01")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabBar6"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabBar7" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 57.409, 6.2)
+collision_mask = 2
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabBar7"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_vungf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabBar7"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_2jx01")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabBar7"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabBar8" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 58.409, 6.2)
+collision_mask = 2
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabBar8"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_vungf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabBar8"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_2jx01")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabBar8"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabBar9" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.133604, 59.409, 6.2)
+collision_mask = 2
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabBar9"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_vungf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabBar9"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_2jx01")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabBar9"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabBar10" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.321673, 60.409, 6.2)
+collision_mask = 2
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabBar10"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_vungf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabBar10"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_2jx01")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabBar10"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabBar11" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.515038, 61.409, 6.2)
+collision_mask = 2
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabBar11"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_vungf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabBar11"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_2jx01")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabBar11"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabBar12" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.707966, 62.409, 6.2)
+collision_mask = 2
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabBar12"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_vungf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabBar12"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_2jx01")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabBar12"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabBar13" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.886406, 63.409, 6.2)
+collision_mask = 2
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabBar13"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_vungf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabBar13"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_2jx01")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabBar13"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabBar14" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.07445, 64.409, 6.2)
+collision_mask = 2
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabBar14"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_vungf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabBar14"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_2jx01")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabBar14"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabBar15" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.26256, 65.409, 6.2)
+collision_mask = 2
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabBar15"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_vungf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabBar15"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_2jx01")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabBar15"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabBar16" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.44771, 66.409, 6.2)
+collision_mask = 2
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabBar16"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_vungf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabBar16"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_2jx01")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabBar16"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabBar17" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.66011, 67.409, 6.2)
+collision_mask = 2
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabBar17"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_vungf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabBar17"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_2jx01")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabBar17"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabBar18" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.40979, 68.0283, 6.2)
+collision_mask = 2
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabBar18"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_vungf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabBar18"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_2jx01")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabBar18"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabPanel23" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(-4.2222e-08, 0.258819, -0.965926, 1.13133e-08, 0.965926, 0.258819, 1, 0, -4.37114e-08, 3.24901, 69.5138, 5.75663)
+collision_mask = 2
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabPanel23"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_thf7n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabPanel23"]
+mesh = SubResource("BoxMesh_ppf5l")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabPanel23"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabPanel24" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(-4.2222e-08, 0.258819, -0.965926, 1.13133e-08, 0.965926, 0.258819, 1, 0, -4.37114e-08, 3.54204, 70.5138, 6.60075)
+collision_mask = 2
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabPanel24"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_thf7n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabPanel24"]
+mesh = SubResource("BoxMesh_ppf5l")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabPanel24"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabPanel25" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(-4.2222e-08, 0.258819, -0.965926, 1.13133e-08, 0.965926, 0.258819, 1, 0, -4.37114e-08, 3.85333, 71.5138, 6.14762)
+collision_mask = 2
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabPanel25"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_thf7n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabPanel25"]
+mesh = SubResource("BoxMesh_ppf5l")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabPanel25"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabPanel26" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(-4.2222e-08, 0.258819, -0.965926, 1.13133e-08, 0.965926, 0.258819, 1, 0, -4.37114e-08, 4.15388, 72.5138, 6.96547)
+collision_mask = 2
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabPanel26"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_thf7n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabPanel26"]
+mesh = SubResource("BoxMesh_ppf5l")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabPanel26"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabPanel27" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(-4.2222e-08, 0.258819, -0.965926, 1.13133e-08, 0.965926, 0.258819, 1, 0, -4.37114e-08, 4.4504, 73.5138, 6.57882)
+collision_mask = 2
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabPanel27"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_thf7n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabPanel27"]
+mesh = SubResource("BoxMesh_ppf5l")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabPanel27"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabPanel28" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(-4.2222e-08, 0.258819, -0.965926, 1.13133e-08, 0.965926, 0.258819, 1, 0, -4.37114e-08, 4.75393, 74.5138, 6.11539)
+collision_mask = 2
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabPanel28"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_thf7n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabPanel28"]
+mesh = SubResource("BoxMesh_ppf5l")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabPanel28"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabPanel29" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(-4.2222e-08, 0.258819, -0.965926, 1.13133e-08, 0.965926, 0.258819, 1, 0, -4.37114e-08, 5.06261, 75.5138, 6.92304)
+collision_mask = 2
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabPanel29"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_thf7n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabPanel29"]
+mesh = SubResource("BoxMesh_ppf5l")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabPanel29"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabPanel30" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(-4.2222e-08, 0.258819, -0.965926, 1.13133e-08, 0.965926, 0.258819, 1, 0, -4.37114e-08, 5.37184, 76.5138, 6.3323)
+collision_mask = 2
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabPanel30"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_thf7n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabPanel30"]
+mesh = SubResource("BoxMesh_ppf5l")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabPanel30"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabPanel31" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(-4.2222e-08, 0.258819, -0.965926, 1.13133e-08, 0.965926, 0.258819, 1, 0, -4.37114e-08, 5.66605, 77.5138, 6.53424)
+collision_mask = 2
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabPanel31"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_thf7n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabPanel31"]
+mesh = SubResource("BoxMesh_ppf5l")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabPanel31"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabPanel32" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(-4.37114e-08, 0, -1, -8.88178e-16, 1, 3.88235e-23, 1, 0, -4.37114e-08, 6, 78.514, 6.325)
+collision_mask = 2
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabPanel32"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_thf7n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabPanel32"]
+mesh = SubResource("BoxMesh_ppf5l")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabPanel32"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabPanel33" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(-4.37114e-08, 0, -1, -8.88178e-16, 1, 3.88235e-23, 1, 0, -4.37114e-08, 6, 79.514, 6.325)
+collision_mask = 2
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabPanel33"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_thf7n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabPanel33"]
+mesh = SubResource("BoxMesh_ppf5l")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabPanel33"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabPanel34" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(-4.37114e-08, 0, -1, -8.88178e-16, 1, 3.88235e-23, 1, 0, -4.37114e-08, 6, 80.514, 6.325)
+collision_mask = 2
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabPanel34"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_thf7n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabPanel34"]
+mesh = SubResource("BoxMesh_ppf5l")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabPanel34"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabPanel35" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(-4.37114e-08, 0, -1, -8.88178e-16, 1, 3.88235e-23, 1, 0, -4.37114e-08, 6, 81.514, 6.325)
+collision_mask = 2
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabPanel35"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_thf7n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabPanel35"]
+mesh = SubResource("BoxMesh_ppf5l")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabPanel35"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabPanel36" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(-4.37114e-08, 0, -1, -8.88178e-16, 1, 3.88235e-23, 1, 0, -4.37114e-08, 6.02959, 82.514, 6.325)
+collision_mask = 2
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabPanel36"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_thf7n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabPanel36"]
+mesh = SubResource("BoxMesh_ppf5l")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabPanel36"]
 node_a = NodePath("..")
 linear_limit/upper_distance = 0.0
 linear_limit/lower_distance = 0.0
@@ -1731,6 +2449,37 @@ libraries = {
 }
 autoplay = "move"
 
+[node name="LaunchPad" type="Node3D" parent="MovingGrabables"]
+transform = Transform3D(0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0, 1, -10.3826, 42.7262, 8.80182)
+
+[node name="Pad" type="CharacterBody3D" parent="MovingGrabables/LaunchPad" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/LaunchPad/Pad"]
+shape = SubResource("BoxShape3D_4t21k")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/LaunchPad/Pad"]
+mesh = SubResource("BoxMesh_n0qw1")
+surface_material_override/0 = SubResource("StandardMaterial3D_7lrps")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingGrabables/LaunchPad/Pad"]
+libraries = {
+"": SubResource("AnimationLibrary_gk6ql")
+}
+autoplay = "spring"
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MovingGrabables/LaunchPad"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/LaunchPad/StaticBody3D"]
+shape = SubResource("BoxShape3D_4t21k")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/LaunchPad/StaticBody3D"]
+mesh = SubResource("BoxMesh_n0qw1")
+surface_material_override/0 = SubResource("StandardMaterial3D_tu75l")
+
 [node name="Windows" type="Node3D" parent="."]
 
 [node name="BreakableWindow" parent="Windows" instance=ExtResource("1_7olci")]
@@ -1759,3 +2508,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.93945, 29.7293, -0.1)
 
 [node name="BreakableWindow9" parent="Windows" instance=ExtResource("1_7olci")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.3691, 31.7421, -0.1)
+
+[node name="BreakableWindow10" parent="Windows" instance=ExtResource("1_7olci")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.1, 55.6166, 3.11614)
