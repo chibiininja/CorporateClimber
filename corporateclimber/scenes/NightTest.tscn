@@ -29,7 +29,7 @@ environment = ExtResource("1_c0l41")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lighting"]
 transform = Transform3D(-0.933724, 0, 0.357993, 0.266642, 0.667261, 0.69546, -0.238875, 0.744824, -0.623038, 0, 0, 0)
-light_color = Color(0.399274, 0.178792, 0.440104, 1)
+light_color = Color(0.641691, 0.366197, 0.692708, 1)
 light_bake_mode = 1
 
 [node name="MockBuildings" type="Node3D" parent="."]
