@@ -43,8 +43,15 @@ var right_foot_active: bool = false
 @onready var right_grip_sound: AudioStreamPlayer3D = $"Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone mixamorig_RightForeArm/GrabJoint/RightGripSound"
 @onready var right_release_sound: AudioStreamPlayer3D = $"Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone mixamorig_RightForeArm/GrabJoint/RightReleaseSound"
 
+var score: int = 0
+@export var max_score: int = 5
+@onready var score_label: Label = $UserInterface/BrokenWindowScoreLabel
+@onready var winning_label: Label = $UserInterface/WinningLabel
+
 
 func _ready() -> void:
+	winning_label.hide()
+	score_label.text = "%s / %s" % [score, max_score]
 	$Armature/Skeleton3D/PhysicalBoneSimulator3D.physical_bones_start_simulation()
 
 func _physics_process(_delta: float) -> void:
@@ -229,6 +236,8 @@ func _on_RightHand_body_entered(body: Node3D) -> void:
 				right_hand_grab = body
 				right_grip_sound.play()
 				print("Right hand grabbing " + body.name)
+				if body.is_in_group("Goal"):
+					winning_label.show()
 
 
 func _on_LeftHand_body_entered(body: Node3D) -> void:
@@ -240,15 +249,23 @@ func _on_LeftHand_body_entered(body: Node3D) -> void:
 				left_hand_grab = body
 				left_grip_sound.play()
 				print("Left hand grabbing " + body.name)
+				if body.is_in_group("Goal"):
+					winning_label.show()
 
 
 func _on_RightFoot_body_entered(body: Node3D) -> void:
 	if right_foot_active:
 		if body is Breakable:
-			body.Break()
+			if not body.isBroken:
+				body.Break()
+				score += 1
+				score_label.text = "%s / %s" % [score, max_score]
 
 
 func _on_LeftFoot_body_entered(body: Node3D) -> void:
 	if left_foot_active:
 		if body is Breakable:
-			body.Break()
+			if not body.isBroken:
+				body.Break()
+				score += 1
+				score_label.text = "%s / %s" % [score, max_score]

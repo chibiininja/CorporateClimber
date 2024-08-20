@@ -101,7 +101,7 @@ transform = Transform3D(0.48612, 0, 3.90808, 0, 4.5736, 0, -5.72435, 0, 0.331881
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00428104, 0.0395908, -0.000442505)
 
 [node name="North" type="CollisionShape3D" parent="RealBuildings/Bounds"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.00704, 46.3088, 6.41043)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.00704, 46.3088, 18.5459)
 shape = SubResource("BoxShape3D_nci2j")
 
 [node name="South" type="CollisionShape3D" parent="RealBuildings/Bounds"]
@@ -339,11 +339,11 @@ transform = Transform3D(-0.724857, 0, 0, 0, 2.11339, 0, 0, 0, 3.50311, -120.778,
 transform = Transform3D(36.2831, 0, 0, 0, 2.57729, 0, 0, 0, 30.9769, 0, 98.009, 0)
 
 [node name="robot" parent="." instance=ExtResource("14_pdggs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.50977, 0.0395904, 1.31288)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.48452, 0.287339, 1.22786)
 walk_speed = 1.0
-walk_animation_speed = 0.7
 walk_animation_angle = 1.0
 jump_strength = 300.0
+max_score = 11
 
 [node name="Sounds" type="Node3D" parent="." node_paths=PackedStringArray("random_sounds")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16)
