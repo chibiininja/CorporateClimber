@@ -32,7 +32,6 @@ fractal_weighted_strength = 0.78
 cellular_jitter = 1.485
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_uqm73"]
-invert = true
 generate_mipmaps = false
 seamless = true
 seamless_blend_skirt = 0.587
@@ -42,7 +41,7 @@ noise = SubResource("FastNoiseLite_10xuj")
 shader = ExtResource("1_yug6o")
 shader_parameter/skyColor = Color(0.0527005, 0.0319553, 0.197917, 1)
 shader_parameter/horizonColor = Color(0.0980415, 0.0215115, 0.135417, 1)
-shader_parameter/clouds_main_color = Color(0.547302, 0.517931, 0.635417, 1)
+shader_parameter/clouds_main_color = Color(0.635417, 0.517931, 0.635417, 1)
 shader_parameter/clouds_edge_color = Color(0.35174, 0.139031, 0.643229, 1)
 shader_parameter/clouds_speed = 0.04
 shader_parameter/clouds_scale = 0.59

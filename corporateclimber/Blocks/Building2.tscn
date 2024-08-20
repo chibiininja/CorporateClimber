@@ -7,6 +7,7 @@
 [node name="Building2" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(80, 0, 0, 0, 100.186, 0, 0, 0, 80, 0, 100.56, 0)
+transform = Transform3D(30, 0, 0, 0, 50, 0, 0, 0, 30, 0, 50, 0)
 material_override = ExtResource("1_sq45y")
 mesh = SubResource("CylinderMesh_y48l8")
+surface_material_override/0 = ExtResource("1_sq45y")

@@ -2,8 +2,11 @@
 
 [resource]
 shading_mode = 2
-albedo_color = Color(0.32549, 0.411765, 0.713726, 1)
+vertex_color_use_as_albedo = true
+albedo_color = Color(0, 0, 0, 1)
 metallic_specular = 0.0
+emission_enabled = true
+emission = Color(0.0884196, 0.139952, 0.320313, 1)
 rim_enabled = true
 rim = 0.59
 rim_tint = 0.86
