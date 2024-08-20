@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://01q8besc7v2x"]
+[gd_scene load_steps=17 format=3 uid="uid://01q8besc7v2x"]
 
 [ext_resource type="PackedScene" uid="uid://dsboxtbpotmu7" path="res://Blocks/MockBuilding.tscn" id="1_8xd8h"]
 [ext_resource type="Environment" uid="uid://mhw5tbhsb0bu" path="res://Lighting/nightEnvironment.tres" id="1_c0l41"]
@@ -13,6 +13,7 @@
 [ext_resource type="Material" uid="uid://ci4i4u4ua1yt0" path="res://Blocks/billboadMat2.tres" id="11_2agfk"]
 [ext_resource type="PackedScene" uid="uid://ckd3b6smegqo2" path="res://Blocks/Billboard.tscn" id="11_e4dt5"]
 [ext_resource type="Material" uid="uid://dcts1wgfmffa8" path="res://Blocks/billboadMat3.tres" id="13_2ri73"]
+[ext_resource type="PackedScene" uid="uid://d0ldee2kfaric" path="res://ragdoll/ragdoll.tscn" id="14_o41o2"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nci2j"]
 size = Vector3(111.191, 93.6175, 1)
@@ -25,6 +26,11 @@ size = Vector3(111.191, 93.6175, 1)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Lighting"]
 environment = ExtResource("1_c0l41")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lighting"]
+transform = Transform3D(-0.933724, 0, 0.357993, 0.266642, 0.667261, 0.69546, -0.238875, 0.744824, -0.623038, 0, 0, 0)
+light_color = Color(0.399274, 0.178792, 0.440104, 1)
+light_bake_mode = 1
 
 [node name="MockBuildings" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.9798, 0.529908, 3.37291)
@@ -324,6 +330,9 @@ transform = Transform3D(-0.724857, 0, 0, 0, 2.11339, 0, 0, 0, 3.50311, -120.778,
 
 [node name="BasicCylinder" parent="RealBuildings/Building12" instance=ExtResource("9_j54cu")]
 transform = Transform3D(36.2831, 0, 0, 0, 2.57729, 0, 0, 0, 30.9769, 0, 98.009, 0)
+
+[node name="ragdoll" parent="RealBuildings" instance=ExtResource("14_o41o2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.11907, 0.0395908, 1.23448)
 
 [editable path="MockBuildings/MockBuilding"]
 [editable path="MockBuildings/MockBuilding2"]
