@@ -1,14 +1,23 @@
-[gd_scene load_steps=15 format=3 uid="uid://cfv2aviop57g"]
+[gd_scene load_steps=32 format=3 uid="uid://cfv2aviop57g"]
 
 [ext_resource type="PackedScene" uid="uid://conxl4qe73nvc" path="res://ragdoll/breakable_window.tscn" id="1_7olci"]
 [ext_resource type="ArrayMesh" uid="uid://58n5n43fqhdu" path="res://Blocks/building.res" id="2_75gvm"]
 [ext_resource type="PackedScene" uid="uid://d0ldee2kfaric" path="res://ragdoll/ragdoll.tscn" id="2_ogaf4"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_ipe1p"]
+size = Vector3(5, 1, 5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jbllw"]
+size = Vector3(5, 1, 5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w8twn"]
+albedo_color = Color(0.262466, 0.221741, 0.41398, 1)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_mxhf3"]
-size = Vector3(48, 1, 48)
+size = Vector3(500, 1, 500)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_bo48v"]
-size = Vector2(48, 48)
+size = Vector2(500, 500)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vxvrc"]
 albedo_color = Color(0.0287776, 0.0160087, 0.119248, 1)
@@ -30,6 +39,21 @@ top_radius = 0.05
 bottom_radius = 0.05
 height = 1.0
 
+[sub_resource type="Animation" id="Animation_qsog3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_ma7ie"]
 resource_name = "move"
 length = 12.0
@@ -47,48 +71,126 @@ tracks/0/keys = {
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 1.75, 0), Vector3(0, 3.5, 0), Vector3(0, 3.5, 0), Vector3(0, 1.75, 0), Vector3(0, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_qsog3"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-10.661, 11.5, -2.15)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_v0nyt"]
 _data = {
 "RESET": SubResource("Animation_qsog3"),
 "move": SubResource("Animation_ma7ie")
 }
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_muqne"]
+height = 20.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_4uakb"]
+top_radius = 0.05
+bottom_radius = 0.05
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_x1f2x"]
+top_radius = 0.025
+bottom_radius = 0.025
+height = 0.75
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b2ocd"]
+albedo_color = Color(0.295867, 0.295866, 0.295866, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_74w7t"]
+radius = 0.025
+height = 0.05
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_2hxt3"]
+height = 0.25
+radius = 0.025
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_njn1m"]
+top_radius = 0.025
+bottom_radius = 0.025
+height = 0.25
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_yfm68"]
+height = 0.1
+radius = 0.2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_7e63b"]
+top_radius = 0.2
+bottom_radius = 0.2
+height = 0.2
+
+[sub_resource type="Animation" id="Animation_nagff"]
+resource_name = "rotate"
+length = 8.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 6.28319)]
+}
+
+[sub_resource type="Animation" id="Animation_gwu6p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_34e52"]
+_data = {
+"RESET": SubResource("Animation_gwu6p"),
+"rotate": SubResource("Animation_nagff")
+}
+
+[sub_resource type="BoxMesh" id="BoxMesh_ed876"]
+size = Vector3(0.1, 2, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4ps0e"]
+albedo_color = Color(0.235732, 0.235732, 0.235732, 1)
+
 [node name="main_building" type="Node3D"]
 
 [node name="Temporary" type="Node3D" parent="."]
 
-[node name="TestFloor" type="StaticBody3D" parent="Temporary"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00428104, 0.0395908, -0.000442505)
+[node name="ragdoll" parent="Temporary" instance=ExtResource("2_ogaf4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.3631, 25.7183, -4)
+walk_speed = 1.5
+
+[node name="TestPlatform" type="StaticBody3D" parent="Temporary/ragdoll"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 collision_mask = 3
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Temporary/TestFloor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-shape = SubResource("BoxShape3D_mxhf3")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Temporary/ragdoll/TestPlatform"]
+shape = SubResource("BoxShape3D_ipe1p")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Temporary/TestFloor"]
-mesh = SubResource("PlaneMesh_bo48v")
-surface_material_override/0 = SubResource("StandardMaterial3D_vxvrc")
-
-[node name="ragdoll" parent="Temporary" instance=ExtResource("2_ogaf4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.316251, -4)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Temporary/ragdoll/TestPlatform"]
+mesh = SubResource("BoxMesh_jbllw")
+surface_material_override/0 = SubResource("StandardMaterial3D_w8twn")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Temporary"]
 transform = Transform3D(0.54841, -0.349531, -0.759654, 0, -0.90845, 0.417994, -0.83621, -0.229232, -0.498203, 0, 0, 0)
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00428104, 0.0395908, -0.000442505)
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_mxhf3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("PlaneMesh_bo48v")
+surface_material_override/0 = SubResource("StandardMaterial3D_vxvrc")
 
 [node name="Building" type="StaticBody3D" parent="."]
 transform = Transform3D(12.62, 0, 0, 0, 12.62, 0, 0, 0, 12.62, 0, 12.583, 0)
@@ -376,13 +478,201 @@ node_a = NodePath("..")
 linear_limit/upper_distance = 0.0
 linear_limit/lower_distance = 0.0
 
+[node name="GrabPanel14" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.26242, 21.3931, -1.6)
+collision_mask = 3
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabPanel14"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_thf7n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabPanel14"]
+mesh = SubResource("BoxMesh_ppf5l")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabPanel14"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabPanel15" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.26242, 20.6737, -1.6)
+collision_mask = 3
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabPanel15"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_thf7n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabPanel15"]
+mesh = SubResource("BoxMesh_ppf5l")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabPanel15"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabPanel16" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.65642, 19.7365, -1.6)
+collision_mask = 3
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabPanel16"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_thf7n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabPanel16"]
+mesh = SubResource("BoxMesh_ppf5l")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabPanel16"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabPanel17" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.39212, 23.0235, -1.6)
+collision_mask = 3
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabPanel17"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_thf7n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabPanel17"]
+mesh = SubResource("BoxMesh_ppf5l")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabPanel17"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabPanel18" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.3433, 23.5654, -1.6)
+collision_mask = 3
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabPanel18"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_thf7n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabPanel18"]
+mesh = SubResource("BoxMesh_ppf5l")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabPanel18"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabPanel19" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.82655, 24.4093, -1.6)
+collision_mask = 3
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabPanel19"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_thf7n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabPanel19"]
+mesh = SubResource("BoxMesh_ppf5l")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabPanel19"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabPanel20" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, -10.9764, 24.9085, -1.2482)
+collision_mask = 3
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabPanel20"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_thf7n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabPanel20"]
+mesh = SubResource("BoxMesh_ppf5l")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabPanel20"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabPanel21" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -11.428, 25.8937, -1.24865)
+collision_mask = 3
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabPanel21"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_thf7n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabPanel21"]
+mesh = SubResource("BoxMesh_ppf5l")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabPanel21"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
+[node name="GrabPanel22" type="RigidBody3D" parent="StaticGrabables" groups=["CanGrab"]]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -11.2, 26.7644, -0.734169)
+collision_mask = 3
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGrabables/GrabPanel22"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_thf7n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGrabables/GrabPanel22"]
+mesh = SubResource("BoxMesh_ppf5l")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="StaticGrabables/GrabPanel22"]
+node_a = NodePath("..")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = 0.0
+
 [node name="MovingGrabables" type="Node3D" parent="."]
 
 [node name="VerticalMovingBar" type="Node3D" parent="MovingGrabables"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.661, 11.5, -2.15)
 
 [node name="BarObject" type="CharacterBody3D" parent="MovingGrabables/VerticalMovingBar" groups=["CanGrab"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.661, 11.5, -2.15)
 collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/VerticalMovingBar/BarObject"]
@@ -400,11 +690,53 @@ libraries = {
 }
 autoplay = "move"
 
+[node name="VerticalMovingBar2" type="Node3D" parent="MovingGrabables"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.74218, 16.4478, -2.15)
+
+[node name="BarObject" type="CharacterBody3D" parent="MovingGrabables/VerticalMovingBar2" groups=["CanGrab"]]
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/VerticalMovingBar2/BarObject"]
+transform = Transform3D(1.91069e-16, -4.37114e-09, -0.1, -0.1, -4.37114e-09, 0, -4.37114e-09, 0.1, -4.37114e-09, 0, 0, 0)
+shape = SubResource("CylinderShape3D_urhsu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/VerticalMovingBar2/BarObject"]
+transform = Transform3D(1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_x1ul6")
+skeleton = NodePath("")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingGrabables/VerticalMovingBar2/BarObject"]
+libraries = {
+"": SubResource("AnimationLibrary_v0nyt")
+}
+autoplay = "move"
+
+[node name="VerticalMovingBar3" type="Node3D" parent="MovingGrabables"]
+transform = Transform3D(-0.707107, 0.707107, 0, -0.707107, -0.707107, 0, 0, 0, 1, 6.492, 22.448, -2.15)
+
+[node name="BarObject" type="CharacterBody3D" parent="MovingGrabables/VerticalMovingBar3" groups=["CanGrab"]]
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/VerticalMovingBar3/BarObject"]
+transform = Transform3D(1.91069e-16, -4.37114e-09, -0.1, -0.1, -4.37114e-09, 0, -4.37114e-09, 0.1, -4.37114e-09, 0, 0, 0)
+shape = SubResource("CylinderShape3D_urhsu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/VerticalMovingBar3/BarObject"]
+transform = Transform3D(1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_x1ul6")
+skeleton = NodePath("")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingGrabables/VerticalMovingBar3/BarObject"]
+libraries = {
+"": SubResource("AnimationLibrary_v0nyt")
+}
+autoplay = "move"
+
 [node name="SliderBar" type="SliderJoint3D" parent="MovingGrabables"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.261, 15, -2.15)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.261, 15, -2.15)
 node_a = NodePath("RigidBody3D")
-linear_limit/upper_distance = 4.0
-linear_limit/lower_distance = -4.0
+linear_limit/upper_distance = 5.0
+linear_limit/lower_distance = -5.0
 
 [node name="RigidBody3D" type="RigidBody3D" parent="MovingGrabables/SliderBar" groups=["CanGrab"]]
 collision_mask = 3
@@ -425,7 +757,1005 @@ transform = Transform3D(1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.3
 mesh = SubResource("CylinderMesh_x1ul6")
 skeleton = NodePath("")
 
+[node name="SliderBar2" type="SliderJoint3D" parent="MovingGrabables"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.75, 15.4, -1.6)
+node_a = NodePath("RigidBody3D")
+linear_limit/upper_distance = 4.0
+linear_limit/lower_distance = -4.0
+
+[node name="RigidBody3D" type="RigidBody3D" parent="MovingGrabables/SliderBar2" groups=["CanGrab"]]
+collision_mask = 3
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+mass = 10.0
+constant_force = Vector3(-5, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/SliderBar2/RigidBody3D"]
+transform = Transform3D(4.37114e-09, -0.1, 8.74228e-09, -0.1, -4.37114e-09, 2.11758e-23, 3.82137e-16, -8.74228e-09, -0.1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_muqne")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/SliderBar2/RigidBody3D"]
+transform = Transform3D(4.37114e-08, -1, 8.74228e-08, -1, -4.37114e-08, 0, 3.82137e-15, -8.74228e-08, -1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_4uakb")
+skeleton = NodePath("")
+
+[node name="HeavyRope" type="Node3D" parent="MovingGrabables"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.71552, 23.2052, -1.60014)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.375)
+mesh = SubResource("CylinderMesh_x1f2x")
+surface_material_override/0 = SubResource("StandardMaterial3D_b2ocd")
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="MovingGrabables/HeavyRope"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.75)
+node_a = NodePath("../Link")
+angular_limit_x/enabled = false
+angular_limit_y/enabled = false
+angular_limit_z/enabled = false
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MovingGrabables/HeavyRope/Generic6DOFJoint3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.24521e-06, 0.00025177, 6.67572e-06)
+mesh = SubResource("SphereMesh_74w7t")
+skeleton = NodePath("../..")
+
+[node name="Link" type="RigidBody3D" parent="MovingGrabables/HeavyRope" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, -0.75)
+collision_layer = 4
+mass = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/HeavyRope/Link"]
+shape = SubResource("CylinderShape3D_2hxt3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope/Link"]
+mesh = SubResource("CylinderMesh_njn1m")
+
+[node name="Generic6DOFJoint3D2" type="Generic6DOFJoint3D" parent="MovingGrabables/HeavyRope"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, -0.75)
+node_a = NodePath("../Link")
+node_b = NodePath("../Link2")
+angular_limit_x/enabled = false
+angular_limit_y/enabled = false
+angular_limit_z/enabled = false
+
+[node name="Link2" type="RigidBody3D" parent="MovingGrabables/HeavyRope" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, -0.75)
+collision_layer = 4
+mass = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/HeavyRope/Link2"]
+shape = SubResource("CylinderShape3D_2hxt3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope/Link2"]
+mesh = SubResource("CylinderMesh_njn1m")
+
+[node name="Generic6DOFJoint3D3" type="Generic6DOFJoint3D" parent="MovingGrabables/HeavyRope"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, -0.75)
+node_a = NodePath("../Link3")
+node_b = NodePath("../Link2")
+angular_limit_x/enabled = false
+angular_limit_y/enabled = false
+angular_limit_z/enabled = false
+
+[node name="Link3" type="RigidBody3D" parent="MovingGrabables/HeavyRope" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, -0.75)
+collision_layer = 4
+mass = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/HeavyRope/Link3"]
+shape = SubResource("CylinderShape3D_2hxt3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope/Link3"]
+mesh = SubResource("CylinderMesh_njn1m")
+
+[node name="Generic6DOFJoint3D4" type="Generic6DOFJoint3D" parent="MovingGrabables/HeavyRope"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, -0.75)
+node_a = NodePath("../Link3")
+node_b = NodePath("../Link4")
+angular_limit_x/enabled = false
+angular_limit_y/enabled = false
+angular_limit_z/enabled = false
+
+[node name="Link4" type="RigidBody3D" parent="MovingGrabables/HeavyRope" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.05, -0.75)
+collision_layer = 4
+mass = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/HeavyRope/Link4"]
+shape = SubResource("CylinderShape3D_2hxt3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope/Link4"]
+mesh = SubResource("CylinderMesh_njn1m")
+
+[node name="HeavyRope2" type="Node3D" parent="MovingGrabables"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.71552, 23.2052, -1.60014)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.375)
+mesh = SubResource("CylinderMesh_x1f2x")
+surface_material_override/0 = SubResource("StandardMaterial3D_b2ocd")
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="MovingGrabables/HeavyRope2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.75)
+node_a = NodePath("../Link")
+angular_limit_x/enabled = false
+angular_limit_y/enabled = false
+angular_limit_z/enabled = false
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MovingGrabables/HeavyRope2/Generic6DOFJoint3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.24521e-06, 0.00025177, 6.67572e-06)
+mesh = SubResource("SphereMesh_74w7t")
+skeleton = NodePath("../..")
+
+[node name="Link" type="RigidBody3D" parent="MovingGrabables/HeavyRope2" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, -0.75)
+collision_layer = 4
+mass = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/HeavyRope2/Link"]
+shape = SubResource("CylinderShape3D_2hxt3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope2/Link"]
+mesh = SubResource("CylinderMesh_njn1m")
+
+[node name="Generic6DOFJoint3D2" type="Generic6DOFJoint3D" parent="MovingGrabables/HeavyRope2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, -0.75)
+node_a = NodePath("../Link")
+node_b = NodePath("../Link2")
+angular_limit_x/enabled = false
+angular_limit_y/enabled = false
+angular_limit_z/enabled = false
+
+[node name="Link2" type="RigidBody3D" parent="MovingGrabables/HeavyRope2" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, -0.75)
+collision_layer = 4
+mass = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/HeavyRope2/Link2"]
+shape = SubResource("CylinderShape3D_2hxt3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope2/Link2"]
+mesh = SubResource("CylinderMesh_njn1m")
+
+[node name="Generic6DOFJoint3D3" type="Generic6DOFJoint3D" parent="MovingGrabables/HeavyRope2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, -0.75)
+node_a = NodePath("../Link3")
+node_b = NodePath("../Link2")
+angular_limit_x/enabled = false
+angular_limit_y/enabled = false
+angular_limit_z/enabled = false
+
+[node name="Link3" type="RigidBody3D" parent="MovingGrabables/HeavyRope2" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, -0.75)
+collision_layer = 4
+mass = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/HeavyRope2/Link3"]
+shape = SubResource("CylinderShape3D_2hxt3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope2/Link3"]
+mesh = SubResource("CylinderMesh_njn1m")
+
+[node name="Generic6DOFJoint3D4" type="Generic6DOFJoint3D" parent="MovingGrabables/HeavyRope2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, -0.75)
+node_a = NodePath("../Link3")
+node_b = NodePath("../Link4")
+angular_limit_x/enabled = false
+angular_limit_y/enabled = false
+angular_limit_z/enabled = false
+
+[node name="Link4" type="RigidBody3D" parent="MovingGrabables/HeavyRope2" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.05, -0.75)
+collision_layer = 4
+mass = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/HeavyRope2/Link4"]
+shape = SubResource("CylinderShape3D_2hxt3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope2/Link4"]
+mesh = SubResource("CylinderMesh_njn1m")
+
+[node name="HeavyRope3" type="Node3D" parent="MovingGrabables"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.71552, 23.2052, -1.60014)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope3"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.375)
+mesh = SubResource("CylinderMesh_x1f2x")
+surface_material_override/0 = SubResource("StandardMaterial3D_b2ocd")
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="MovingGrabables/HeavyRope3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.75)
+node_a = NodePath("../Link")
+angular_limit_x/enabled = false
+angular_limit_y/enabled = false
+angular_limit_z/enabled = false
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MovingGrabables/HeavyRope3/Generic6DOFJoint3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.24521e-06, 0.00025177, 6.67572e-06)
+mesh = SubResource("SphereMesh_74w7t")
+skeleton = NodePath("../..")
+
+[node name="Link" type="RigidBody3D" parent="MovingGrabables/HeavyRope3" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, -0.75)
+collision_layer = 4
+mass = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/HeavyRope3/Link"]
+shape = SubResource("CylinderShape3D_2hxt3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope3/Link"]
+mesh = SubResource("CylinderMesh_njn1m")
+
+[node name="Generic6DOFJoint3D2" type="Generic6DOFJoint3D" parent="MovingGrabables/HeavyRope3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, -0.75)
+node_a = NodePath("../Link")
+node_b = NodePath("../Link2")
+angular_limit_x/enabled = false
+angular_limit_y/enabled = false
+angular_limit_z/enabled = false
+
+[node name="Link2" type="RigidBody3D" parent="MovingGrabables/HeavyRope3" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, -0.75)
+collision_layer = 4
+mass = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/HeavyRope3/Link2"]
+shape = SubResource("CylinderShape3D_2hxt3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope3/Link2"]
+mesh = SubResource("CylinderMesh_njn1m")
+
+[node name="Generic6DOFJoint3D3" type="Generic6DOFJoint3D" parent="MovingGrabables/HeavyRope3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, -0.75)
+node_a = NodePath("../Link3")
+node_b = NodePath("../Link2")
+angular_limit_x/enabled = false
+angular_limit_y/enabled = false
+angular_limit_z/enabled = false
+
+[node name="Link3" type="RigidBody3D" parent="MovingGrabables/HeavyRope3" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, -0.75)
+collision_layer = 4
+mass = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/HeavyRope3/Link3"]
+shape = SubResource("CylinderShape3D_2hxt3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope3/Link3"]
+mesh = SubResource("CylinderMesh_njn1m")
+
+[node name="Generic6DOFJoint3D4" type="Generic6DOFJoint3D" parent="MovingGrabables/HeavyRope3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, -0.75)
+node_a = NodePath("../Link3")
+node_b = NodePath("../Link4")
+angular_limit_x/enabled = false
+angular_limit_y/enabled = false
+angular_limit_z/enabled = false
+
+[node name="Link4" type="RigidBody3D" parent="MovingGrabables/HeavyRope3" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.05, -0.75)
+collision_layer = 4
+mass = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/HeavyRope3/Link4"]
+shape = SubResource("CylinderShape3D_2hxt3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope3/Link4"]
+mesh = SubResource("CylinderMesh_njn1m")
+
+[node name="HeavyRope4" type="Node3D" parent="MovingGrabables"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.284483, 23.2052, -1.60014)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope4"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.375)
+mesh = SubResource("CylinderMesh_x1f2x")
+surface_material_override/0 = SubResource("StandardMaterial3D_b2ocd")
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="MovingGrabables/HeavyRope4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.75)
+node_a = NodePath("../Link")
+angular_limit_x/enabled = false
+angular_limit_y/enabled = false
+angular_limit_z/enabled = false
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MovingGrabables/HeavyRope4/Generic6DOFJoint3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.24521e-06, 0.00025177, 6.67572e-06)
+mesh = SubResource("SphereMesh_74w7t")
+skeleton = NodePath("../..")
+
+[node name="Link" type="RigidBody3D" parent="MovingGrabables/HeavyRope4" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, -0.75)
+collision_layer = 4
+mass = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/HeavyRope4/Link"]
+shape = SubResource("CylinderShape3D_2hxt3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope4/Link"]
+mesh = SubResource("CylinderMesh_njn1m")
+
+[node name="Generic6DOFJoint3D2" type="Generic6DOFJoint3D" parent="MovingGrabables/HeavyRope4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, -0.75)
+node_a = NodePath("../Link")
+node_b = NodePath("../Link2")
+angular_limit_x/enabled = false
+angular_limit_y/enabled = false
+angular_limit_z/enabled = false
+
+[node name="Link2" type="RigidBody3D" parent="MovingGrabables/HeavyRope4" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, -0.75)
+collision_layer = 4
+mass = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/HeavyRope4/Link2"]
+shape = SubResource("CylinderShape3D_2hxt3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope4/Link2"]
+mesh = SubResource("CylinderMesh_njn1m")
+
+[node name="Generic6DOFJoint3D3" type="Generic6DOFJoint3D" parent="MovingGrabables/HeavyRope4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, -0.75)
+node_a = NodePath("../Link3")
+node_b = NodePath("../Link2")
+angular_limit_x/enabled = false
+angular_limit_y/enabled = false
+angular_limit_z/enabled = false
+
+[node name="Link3" type="RigidBody3D" parent="MovingGrabables/HeavyRope4" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, -0.75)
+collision_layer = 4
+mass = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/HeavyRope4/Link3"]
+shape = SubResource("CylinderShape3D_2hxt3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope4/Link3"]
+mesh = SubResource("CylinderMesh_njn1m")
+
+[node name="Generic6DOFJoint3D4" type="Generic6DOFJoint3D" parent="MovingGrabables/HeavyRope4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, -0.75)
+node_a = NodePath("../Link3")
+node_b = NodePath("../Link4")
+angular_limit_x/enabled = false
+angular_limit_y/enabled = false
+angular_limit_z/enabled = false
+
+[node name="Link4" type="RigidBody3D" parent="MovingGrabables/HeavyRope4" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.05, -0.75)
+collision_layer = 4
+mass = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/HeavyRope4/Link4"]
+shape = SubResource("CylinderShape3D_2hxt3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope4/Link4"]
+mesh = SubResource("CylinderMesh_njn1m")
+
+[node name="HeavyRope5" type="Node3D" parent="MovingGrabables"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.28448, 23.2052, -1.60014)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope5"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.375)
+mesh = SubResource("CylinderMesh_x1f2x")
+surface_material_override/0 = SubResource("StandardMaterial3D_b2ocd")
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="MovingGrabables/HeavyRope5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.75)
+node_a = NodePath("../Link")
+angular_limit_x/enabled = false
+angular_limit_y/enabled = false
+angular_limit_z/enabled = false
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MovingGrabables/HeavyRope5/Generic6DOFJoint3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.24521e-06, 0.00025177, 6.67572e-06)
+mesh = SubResource("SphereMesh_74w7t")
+skeleton = NodePath("../..")
+
+[node name="Link" type="RigidBody3D" parent="MovingGrabables/HeavyRope5" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, -0.75)
+collision_layer = 4
+mass = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/HeavyRope5/Link"]
+shape = SubResource("CylinderShape3D_2hxt3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope5/Link"]
+mesh = SubResource("CylinderMesh_njn1m")
+
+[node name="Generic6DOFJoint3D2" type="Generic6DOFJoint3D" parent="MovingGrabables/HeavyRope5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, -0.75)
+node_a = NodePath("../Link")
+node_b = NodePath("../Link2")
+angular_limit_x/enabled = false
+angular_limit_y/enabled = false
+angular_limit_z/enabled = false
+
+[node name="Link2" type="RigidBody3D" parent="MovingGrabables/HeavyRope5" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, -0.75)
+collision_layer = 4
+mass = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/HeavyRope5/Link2"]
+shape = SubResource("CylinderShape3D_2hxt3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope5/Link2"]
+mesh = SubResource("CylinderMesh_njn1m")
+
+[node name="Generic6DOFJoint3D3" type="Generic6DOFJoint3D" parent="MovingGrabables/HeavyRope5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, -0.75)
+node_a = NodePath("../Link3")
+node_b = NodePath("../Link2")
+angular_limit_x/enabled = false
+angular_limit_y/enabled = false
+angular_limit_z/enabled = false
+
+[node name="Link3" type="RigidBody3D" parent="MovingGrabables/HeavyRope5" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, -0.75)
+collision_layer = 4
+mass = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/HeavyRope5/Link3"]
+shape = SubResource("CylinderShape3D_2hxt3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope5/Link3"]
+mesh = SubResource("CylinderMesh_njn1m")
+
+[node name="Generic6DOFJoint3D4" type="Generic6DOFJoint3D" parent="MovingGrabables/HeavyRope5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, -0.75)
+node_a = NodePath("../Link3")
+node_b = NodePath("../Link4")
+angular_limit_x/enabled = false
+angular_limit_y/enabled = false
+angular_limit_z/enabled = false
+
+[node name="Link4" type="RigidBody3D" parent="MovingGrabables/HeavyRope5" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.05, -0.75)
+collision_layer = 4
+mass = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/HeavyRope5/Link4"]
+shape = SubResource("CylinderShape3D_2hxt3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope5/Link4"]
+mesh = SubResource("CylinderMesh_njn1m")
+
+[node name="HeavyRope6" type="Node3D" parent="MovingGrabables"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.28448, 23.2052, -1.60014)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope6"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.375)
+mesh = SubResource("CylinderMesh_x1f2x")
+surface_material_override/0 = SubResource("StandardMaterial3D_b2ocd")
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="MovingGrabables/HeavyRope6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.75)
+node_a = NodePath("../Link")
+angular_limit_x/enabled = false
+angular_limit_y/enabled = false
+angular_limit_z/enabled = false
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MovingGrabables/HeavyRope6/Generic6DOFJoint3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.24521e-06, 0.00025177, 6.67572e-06)
+mesh = SubResource("SphereMesh_74w7t")
+skeleton = NodePath("../..")
+
+[node name="Link" type="RigidBody3D" parent="MovingGrabables/HeavyRope6" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, -0.75)
+collision_layer = 4
+mass = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/HeavyRope6/Link"]
+shape = SubResource("CylinderShape3D_2hxt3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope6/Link"]
+mesh = SubResource("CylinderMesh_njn1m")
+
+[node name="Generic6DOFJoint3D2" type="Generic6DOFJoint3D" parent="MovingGrabables/HeavyRope6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, -0.75)
+node_a = NodePath("../Link")
+node_b = NodePath("../Link2")
+angular_limit_x/enabled = false
+angular_limit_y/enabled = false
+angular_limit_z/enabled = false
+
+[node name="Link2" type="RigidBody3D" parent="MovingGrabables/HeavyRope6" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, -0.75)
+collision_layer = 4
+mass = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/HeavyRope6/Link2"]
+shape = SubResource("CylinderShape3D_2hxt3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope6/Link2"]
+mesh = SubResource("CylinderMesh_njn1m")
+
+[node name="Generic6DOFJoint3D3" type="Generic6DOFJoint3D" parent="MovingGrabables/HeavyRope6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, -0.75)
+node_a = NodePath("../Link3")
+node_b = NodePath("../Link2")
+angular_limit_x/enabled = false
+angular_limit_y/enabled = false
+angular_limit_z/enabled = false
+
+[node name="Link3" type="RigidBody3D" parent="MovingGrabables/HeavyRope6" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, -0.75)
+collision_layer = 4
+mass = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/HeavyRope6/Link3"]
+shape = SubResource("CylinderShape3D_2hxt3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope6/Link3"]
+mesh = SubResource("CylinderMesh_njn1m")
+
+[node name="Generic6DOFJoint3D4" type="Generic6DOFJoint3D" parent="MovingGrabables/HeavyRope6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, -0.75)
+node_a = NodePath("../Link3")
+node_b = NodePath("../Link4")
+angular_limit_x/enabled = false
+angular_limit_y/enabled = false
+angular_limit_z/enabled = false
+
+[node name="Link4" type="RigidBody3D" parent="MovingGrabables/HeavyRope6" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.05, -0.75)
+collision_layer = 4
+mass = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/HeavyRope6/Link4"]
+shape = SubResource("CylinderShape3D_2hxt3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope6/Link4"]
+mesh = SubResource("CylinderMesh_njn1m")
+
+[node name="HeavyRope7" type="Node3D" parent="MovingGrabables"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.28448, 23.2052, -1.60014)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope7"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.375)
+mesh = SubResource("CylinderMesh_x1f2x")
+surface_material_override/0 = SubResource("StandardMaterial3D_b2ocd")
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="MovingGrabables/HeavyRope7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.75)
+node_a = NodePath("../Link")
+angular_limit_x/enabled = false
+angular_limit_y/enabled = false
+angular_limit_z/enabled = false
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MovingGrabables/HeavyRope7/Generic6DOFJoint3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.24521e-06, 0.00025177, 6.67572e-06)
+mesh = SubResource("SphereMesh_74w7t")
+skeleton = NodePath("../..")
+
+[node name="Link" type="RigidBody3D" parent="MovingGrabables/HeavyRope7" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, -0.75)
+collision_layer = 4
+mass = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/HeavyRope7/Link"]
+shape = SubResource("CylinderShape3D_2hxt3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope7/Link"]
+mesh = SubResource("CylinderMesh_njn1m")
+
+[node name="Generic6DOFJoint3D2" type="Generic6DOFJoint3D" parent="MovingGrabables/HeavyRope7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, -0.75)
+node_a = NodePath("../Link")
+node_b = NodePath("../Link2")
+angular_limit_x/enabled = false
+angular_limit_y/enabled = false
+angular_limit_z/enabled = false
+
+[node name="Link2" type="RigidBody3D" parent="MovingGrabables/HeavyRope7" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, -0.75)
+collision_layer = 4
+mass = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/HeavyRope7/Link2"]
+shape = SubResource("CylinderShape3D_2hxt3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope7/Link2"]
+mesh = SubResource("CylinderMesh_njn1m")
+
+[node name="Generic6DOFJoint3D3" type="Generic6DOFJoint3D" parent="MovingGrabables/HeavyRope7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, -0.75)
+node_a = NodePath("../Link3")
+node_b = NodePath("../Link2")
+angular_limit_x/enabled = false
+angular_limit_y/enabled = false
+angular_limit_z/enabled = false
+
+[node name="Link3" type="RigidBody3D" parent="MovingGrabables/HeavyRope7" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, -0.75)
+collision_layer = 4
+mass = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/HeavyRope7/Link3"]
+shape = SubResource("CylinderShape3D_2hxt3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope7/Link3"]
+mesh = SubResource("CylinderMesh_njn1m")
+
+[node name="Generic6DOFJoint3D4" type="Generic6DOFJoint3D" parent="MovingGrabables/HeavyRope7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, -0.75)
+node_a = NodePath("../Link3")
+node_b = NodePath("../Link4")
+angular_limit_x/enabled = false
+angular_limit_y/enabled = false
+angular_limit_z/enabled = false
+
+[node name="Link4" type="RigidBody3D" parent="MovingGrabables/HeavyRope7" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.05, -0.75)
+collision_layer = 4
+mass = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/HeavyRope7/Link4"]
+shape = SubResource("CylinderShape3D_2hxt3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope7/Link4"]
+mesh = SubResource("CylinderMesh_njn1m")
+
+[node name="HeavyRope8" type="Node3D" parent="MovingGrabables"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.28448, 23.2052, -1.60014)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope8"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.375)
+mesh = SubResource("CylinderMesh_x1f2x")
+surface_material_override/0 = SubResource("StandardMaterial3D_b2ocd")
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="MovingGrabables/HeavyRope8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.75)
+node_a = NodePath("../Link")
+angular_limit_x/enabled = false
+angular_limit_y/enabled = false
+angular_limit_z/enabled = false
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MovingGrabables/HeavyRope8/Generic6DOFJoint3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.24521e-06, 0.00025177, 6.67572e-06)
+mesh = SubResource("SphereMesh_74w7t")
+skeleton = NodePath("../..")
+
+[node name="Link" type="RigidBody3D" parent="MovingGrabables/HeavyRope8" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, -0.75)
+collision_layer = 4
+mass = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/HeavyRope8/Link"]
+shape = SubResource("CylinderShape3D_2hxt3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope8/Link"]
+mesh = SubResource("CylinderMesh_njn1m")
+
+[node name="Generic6DOFJoint3D2" type="Generic6DOFJoint3D" parent="MovingGrabables/HeavyRope8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, -0.75)
+node_a = NodePath("../Link")
+node_b = NodePath("../Link2")
+angular_limit_x/enabled = false
+angular_limit_y/enabled = false
+angular_limit_z/enabled = false
+
+[node name="Link2" type="RigidBody3D" parent="MovingGrabables/HeavyRope8" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, -0.75)
+collision_layer = 4
+mass = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/HeavyRope8/Link2"]
+shape = SubResource("CylinderShape3D_2hxt3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope8/Link2"]
+mesh = SubResource("CylinderMesh_njn1m")
+
+[node name="Generic6DOFJoint3D3" type="Generic6DOFJoint3D" parent="MovingGrabables/HeavyRope8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, -0.75)
+node_a = NodePath("../Link3")
+node_b = NodePath("../Link2")
+angular_limit_x/enabled = false
+angular_limit_y/enabled = false
+angular_limit_z/enabled = false
+
+[node name="Link3" type="RigidBody3D" parent="MovingGrabables/HeavyRope8" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, -0.75)
+collision_layer = 4
+mass = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/HeavyRope8/Link3"]
+shape = SubResource("CylinderShape3D_2hxt3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope8/Link3"]
+mesh = SubResource("CylinderMesh_njn1m")
+
+[node name="Generic6DOFJoint3D4" type="Generic6DOFJoint3D" parent="MovingGrabables/HeavyRope8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, -0.75)
+node_a = NodePath("../Link3")
+node_b = NodePath("../Link4")
+angular_limit_x/enabled = false
+angular_limit_y/enabled = false
+angular_limit_z/enabled = false
+
+[node name="Link4" type="RigidBody3D" parent="MovingGrabables/HeavyRope8" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.05, -0.75)
+collision_layer = 4
+mass = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/HeavyRope8/Link4"]
+shape = SubResource("CylinderShape3D_2hxt3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/HeavyRope8/Link4"]
+mesh = SubResource("CylinderMesh_njn1m")
+
+[node name="RotatingPanel" type="Node3D" parent="MovingGrabables"]
+transform = Transform3D(-0.5, -0.866025, 0, 0.866025, -0.5, 0, 0, 0, 1, -8.284, 29.205, 0)
+
+[node name="Origin" type="CharacterBody3D" parent="MovingGrabables/RotatingPanel" groups=["CanGrab"]]
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/RotatingPanel/Origin"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -2, 0)
+shape = SubResource("CylinderShape3D_yfm68")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/RotatingPanel/Origin"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -2, 0)
+mesh = SubResource("CylinderMesh_7e63b")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingGrabables/RotatingPanel/Origin"]
+libraries = {
+"": SubResource("AnimationLibrary_34e52")
+}
+autoplay = "rotate"
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MovingGrabables/RotatingPanel/Origin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+mesh = SubResource("BoxMesh_ed876")
+surface_material_override/0 = SubResource("StandardMaterial3D_4ps0e")
+
+[node name="RotatingPanel2" type="Node3D" parent="MovingGrabables"]
+transform = Transform3D(0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0, 1, -4.284, 31.205, 0)
+
+[node name="Origin" type="CharacterBody3D" parent="MovingGrabables/RotatingPanel2" groups=["CanGrab"]]
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/RotatingPanel2/Origin"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -2, 0)
+shape = SubResource("CylinderShape3D_yfm68")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/RotatingPanel2/Origin"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -2, 0)
+mesh = SubResource("CylinderMesh_7e63b")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingGrabables/RotatingPanel2/Origin"]
+libraries = {
+"": SubResource("AnimationLibrary_34e52")
+}
+autoplay = "rotate"
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MovingGrabables/RotatingPanel2/Origin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+mesh = SubResource("BoxMesh_ed876")
+surface_material_override/0 = SubResource("StandardMaterial3D_4ps0e")
+
+[node name="RotatingPanel3" type="Node3D" parent="MovingGrabables"]
+transform = Transform3D(-0.5, -0.866025, 0, 0.866025, -0.5, 0, 0, 0, 1, 0.716, 31.205, 0)
+
+[node name="Origin" type="CharacterBody3D" parent="MovingGrabables/RotatingPanel3" groups=["CanGrab"]]
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/RotatingPanel3/Origin"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -2, 0)
+shape = SubResource("CylinderShape3D_yfm68")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/RotatingPanel3/Origin"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -2, 0)
+mesh = SubResource("CylinderMesh_7e63b")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingGrabables/RotatingPanel3/Origin"]
+libraries = {
+"": SubResource("AnimationLibrary_34e52")
+}
+autoplay = "rotate"
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MovingGrabables/RotatingPanel3/Origin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+mesh = SubResource("BoxMesh_ed876")
+surface_material_override/0 = SubResource("StandardMaterial3D_4ps0e")
+
+[node name="RotatingPanel4" type="Node3D" parent="MovingGrabables"]
+transform = Transform3D(-0.866025, 0.5, -7.10543e-15, 0.5, 0.866025, -8.74228e-08, -4.37114e-08, -7.57103e-08, -1, 4.716, 34.205, 0)
+
+[node name="Origin" type="CharacterBody3D" parent="MovingGrabables/RotatingPanel4" groups=["CanGrab"]]
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/RotatingPanel4/Origin"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -2, 0)
+shape = SubResource("CylinderShape3D_yfm68")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/RotatingPanel4/Origin"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -2, 0)
+mesh = SubResource("CylinderMesh_7e63b")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingGrabables/RotatingPanel4/Origin"]
+libraries = {
+"": SubResource("AnimationLibrary_34e52")
+}
+autoplay = "rotate"
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MovingGrabables/RotatingPanel4/Origin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+mesh = SubResource("BoxMesh_ed876")
+surface_material_override/0 = SubResource("StandardMaterial3D_4ps0e")
+
+[node name="RotatingPanel5" type="Node3D" parent="MovingGrabables"]
+transform = Transform3D(-0.965926, 0.258819, 0, -0.258819, -0.965926, 0, 0, 0, 1, 6.716, 36.9449, 0)
+
+[node name="Origin" type="CharacterBody3D" parent="MovingGrabables/RotatingPanel5" groups=["CanGrab"]]
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/RotatingPanel5/Origin"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -2, 0)
+shape = SubResource("CylinderShape3D_yfm68")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/RotatingPanel5/Origin"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -2, 0)
+mesh = SubResource("CylinderMesh_7e63b")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingGrabables/RotatingPanel5/Origin"]
+libraries = {
+"": SubResource("AnimationLibrary_34e52")
+}
+autoplay = "rotate"
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MovingGrabables/RotatingPanel5/Origin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+mesh = SubResource("BoxMesh_ed876")
+surface_material_override/0 = SubResource("StandardMaterial3D_4ps0e")
+
+[node name="RotatingPanel6" type="Node3D" parent="MovingGrabables"]
+transform = Transform3D(0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0, 0, 1, 4.95218, 41.5628, 0)
+
+[node name="Origin" type="CharacterBody3D" parent="MovingGrabables/RotatingPanel6" groups=["CanGrab"]]
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/RotatingPanel6/Origin"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -2, 0)
+shape = SubResource("CylinderShape3D_yfm68")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/RotatingPanel6/Origin"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -2, 0)
+mesh = SubResource("CylinderMesh_7e63b")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingGrabables/RotatingPanel6/Origin"]
+libraries = {
+"": SubResource("AnimationLibrary_34e52")
+}
+autoplay = "rotate"
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MovingGrabables/RotatingPanel6/Origin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+mesh = SubResource("BoxMesh_ed876")
+surface_material_override/0 = SubResource("StandardMaterial3D_4ps0e")
+
+[node name="RotatingPanel7" type="Node3D" parent="MovingGrabables"]
+transform = Transform3D(-0.993377, -0.114902, 5.21212e-08, -0.114902, 0.993377, -7.01863e-08, -4.37114e-08, -7.57103e-08, -1, -0.0195788, 40.9632, 0)
+
+[node name="Origin" type="CharacterBody3D" parent="MovingGrabables/RotatingPanel7" groups=["CanGrab"]]
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/RotatingPanel7/Origin"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -2, 0)
+shape = SubResource("CylinderShape3D_yfm68")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/RotatingPanel7/Origin"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -2, 0)
+mesh = SubResource("CylinderMesh_7e63b")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingGrabables/RotatingPanel7/Origin"]
+libraries = {
+"": SubResource("AnimationLibrary_34e52")
+}
+autoplay = "rotate"
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MovingGrabables/RotatingPanel7/Origin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+mesh = SubResource("BoxMesh_ed876")
+surface_material_override/0 = SubResource("StandardMaterial3D_4ps0e")
+
+[node name="RotatingPanel8" type="Node3D" parent="MovingGrabables"]
+transform = Transform3D(0.929789, 0.368092, -6.85108e-08, 0.368092, -0.929789, 5.43049e-08, -4.37114e-08, -7.57103e-08, -1, -4.58309, 41.8292, 0)
+
+[node name="Origin" type="CharacterBody3D" parent="MovingGrabables/RotatingPanel8" groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00183773, -0.00460815, -0.00137281)
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/RotatingPanel8/Origin"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -2, 0)
+shape = SubResource("CylinderShape3D_yfm68")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/RotatingPanel8/Origin"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -2, 0)
+mesh = SubResource("CylinderMesh_7e63b")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingGrabables/RotatingPanel8/Origin"]
+libraries = {
+"": SubResource("AnimationLibrary_34e52")
+}
+autoplay = "rotate"
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MovingGrabables/RotatingPanel8/Origin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+mesh = SubResource("BoxMesh_ed876")
+surface_material_override/0 = SubResource("StandardMaterial3D_4ps0e")
+
+[node name="SliderBar3" type="SliderJoint3D" parent="MovingGrabables"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -9.02076, 42.56, 0)
+node_a = NodePath("RigidBody3D")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="MovingGrabables/SliderBar3" groups=["CanGrab"]]
+collision_mask = 3
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+mass = 10.0
+constant_force = Vector3(5, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/SliderBar3/RigidBody3D"]
+transform = Transform3D(4.37114e-09, -0.1, 8.74228e-09, -0.1, -4.37114e-09, 2.11758e-23, 3.82137e-16, -8.74228e-09, -0.1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_muqne")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/SliderBar3/RigidBody3D"]
+transform = Transform3D(4.37114e-08, -1, 8.74228e-08, -1, -4.37114e-08, 0, 3.82137e-15, -8.74228e-08, -1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_4uakb")
+skeleton = NodePath("")
+
+[node name="VerticalMovingBar4" type="Node3D" parent="MovingGrabables"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.161, 43, -0.55)
+
+[node name="BarObject" type="CharacterBody3D" parent="MovingGrabables/VerticalMovingBar4" groups=["CanGrab"]]
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGrabables/VerticalMovingBar4/BarObject"]
+transform = Transform3D(1.91069e-16, -4.37114e-09, -0.1, -0.1, -4.37114e-09, 0, -4.37114e-09, 0.1, -4.37114e-09, 0, 0, 0)
+shape = SubResource("CylinderShape3D_urhsu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGrabables/VerticalMovingBar4/BarObject"]
+transform = Transform3D(1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_x1ul6")
+skeleton = NodePath("")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingGrabables/VerticalMovingBar4/BarObject"]
+libraries = {
+"": SubResource("AnimationLibrary_v0nyt")
+}
+autoplay = "move"
+
 [node name="Windows" type="Node3D" parent="."]
 
 [node name="BreakableWindow" parent="Windows" instance=ExtResource("1_7olci")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.2749, 5.76311, -1.7)
+
+[node name="BreakableWindow2" parent="Windows" instance=ExtResource("1_7olci")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2749, 13.7631, -1.7)
+
+[node name="BreakableWindow3" parent="Windows" instance=ExtResource("1_7olci")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.42878, 14.2306, -1.7)
+
+[node name="BreakableWindow4" parent="Windows" instance=ExtResource("1_7olci")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.42878, 14.2306, -1.7)
+
+[node name="BreakableWindow5" parent="Windows" instance=ExtResource("1_7olci")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.71603, 21.865, -1.7)
+
+[node name="BreakableWindow6" parent="Windows" instance=ExtResource("1_7olci")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.57308, 18.737, -1.7)
+
+[node name="BreakableWindow7" parent="Windows" instance=ExtResource("1_7olci")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.4119, 21.7276, -1.7)
+
+[node name="BreakableWindow8" parent="Windows" instance=ExtResource("1_7olci")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.93945, 29.7293, -0.1)
+
+[node name="BreakableWindow9" parent="Windows" instance=ExtResource("1_7olci")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.3691, 31.7421, -0.1)
